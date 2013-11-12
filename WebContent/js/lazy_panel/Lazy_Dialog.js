@@ -39,10 +39,11 @@ Lazy_Dialog = Backbone.View
 			},
 
 			events : {
-				"mousemove .cs2c_dialog_header" : "mouseMoveDone",
-				"mousedown .cs2c_dialog_header" : "mouseDownDone",
+				"mousemove .cs2c_dialog_header" : "_mouseMoveDone",
+				"mousedown .cs2c_dialog_header" : "_mouseDownDone",
+				"click .cs2c_dialog_button a" : "_buttonAction",
+
 				"click .cs2c_dialog_close_btn" : "closeDialog",
-				"click .cs2c_dialog_button a" : "buttonAction"
 			},
 
 			/* -------------- Private Methods ---------------------- */
@@ -60,14 +61,15 @@ Lazy_Dialog = Backbone.View
 				$(this.options.baseEl).parent().append(this.el);
 
 				// 创建对话框内容
-				this.createUidom();
-				this.createHeader();
-				this.createContent();
-				this.createDialogShadow();
-				this.createBottomButtons();
-				this.isShadowMask(this.options.modal);
+				this._createUidom();
+				this._createHeader();
+				this._createContent();
+				this._createDialogShadow();
+				this._createBottomButtons();
+				this._isShadowMask(this.options.modal);
+				this._createOtherComponent();
+
 				this.closeDialog();
-				this.createOtherComponent();
 
 				_.bindAll(this, 'render');
 
@@ -123,13 +125,13 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 创建对话框四周边界的演示显示div区域 2013-8-9 */
-			createUidom : function() {
+			_createUidom : function() {
 				var uiStr = '<div class="ui_left"></div><div class="ui_right"></div><div class="ui_top"></div><div class="ui_bottom"></div>';
 				$(this.el).append(uiStr);
 			},
 
 			/* 创建对话框的标题 2012-10-19 */
-			createHeader : function() {
+			_createHeader : function() {
 
 				// 创建标题栏
 				$(this.el).append('<div class="cs2c_dialog_header"></div>');
@@ -148,7 +150,7 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 将用户定义的对话框内容层插入到绘制的对话框中 2012-10-19 */
-			createContent : function() {
+			_createContent : function() {
 
 				// 创建对话框的内容显示区域
 				var dialog_body = document.createElement("div");
@@ -170,13 +172,13 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 变换鼠标显示状态，移动 2012-12-5 @param e */
-			mouseMoveDone : function(e) {
+			_mouseMoveDone : function(e) {
 				var header = e.currentTarget;
 				header.style.cursor = "move";
 			},
 
 			/* 左键控制鼠标的移动 2012-12-5 @param e */
-			mouseDownDone : function(e) {
+			_mouseDownDone : function(e) {
 
 				e = e || event;
 				var moveObj = $(e.currentTarget).parent();
@@ -204,7 +206,7 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 创建对话框背景蒙板层 2012-10-19 */
-			createDialogShadow : function() {
+			_createDialogShadow : function() {
 
 				var pageWidth = window.innerWidth, pageHeight = window.innerHeight;
 				if (typeof pageWidth != 'number') {
@@ -222,7 +224,7 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 是否显示对话框的背景遮罩蒙板 2012-11-1 @param flag */
-			isShadowMask : function(flag) {
+			_isShadowMask : function(flag) {
 				var outterMasks = $(this.el).siblings('.cs2c_dialog_shadow');
 				if (outterMasks.length > 1) {
 					_.each(outterMasks, function(outterMask) {
@@ -240,7 +242,7 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 控制对话框的开关状态 2012-11-1 @param flag */
-			isOpenDialog : function(flag) {
+			_isOpenDialog : function(flag) {
 				$(this.el).css({
 					zIndex : zIndex++
 				});
@@ -254,7 +256,7 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 创建底部按钮集合层 2012-10-29 */
-			createBottomButtons : function() {
+			_createBottomButtons : function() {
 
 				if (this.options.buttons.length == 0) {
 					return;
@@ -281,7 +283,7 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 对话框按钮执行动作 2012-10-30 @param e */
-			buttonAction : function(e) {
+			_buttonAction : function(e) {
 				var button = e.currentTarget.id;
 				switch (button) {
 				case "ok":
@@ -297,7 +299,7 @@ Lazy_Dialog = Backbone.View
 			},
 
 			/* 可自定义其他的控件 2012-12-21 */
-			createOtherComponent : function() {
+			_createOtherComponent : function() {
 
 			},
 
@@ -312,10 +314,10 @@ Lazy_Dialog = Backbone.View
 					x : x,
 					y : y
 				};
-				this.isOpenDialog(true);
+				this._isOpenDialog(true);
 
-				this.isShadowMask(this.options.modal);
-				this.createOtherComponent();
+				this._isShadowMask(this.options.modal);
+				this._createOtherComponent();
 				this.render();
 
 				// 打开对话框即将鼠标焦点聚焦在第一个input输入框上
@@ -332,8 +334,8 @@ Lazy_Dialog = Backbone.View
 			/* 关闭对话框 2012-10-29 */
 			closeDialog : function() {
 
-				this.isOpenDialog(false);
-				this.isShadowMask(false);
+				this._isOpenDialog(false);
+				this._isShadowMask(false);
 				// 隐藏对话框中的tip提示小标签
 				$('.validate_tip').hide();
 			},

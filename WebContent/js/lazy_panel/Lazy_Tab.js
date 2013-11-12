@@ -50,7 +50,7 @@ Lazy_Tab = Backbone.View.extend({
 	createTabsBody : function() {
 
 		$(this.el).append($(this.options.baseEl));
-		var tabsBody = $(this.el).find('#' + this.options.tab_id);
+		var tabsBody = $(this.el).find(this.options.baseEl);
 		tabsBody.addClass('cs2c_tab_ctx');
 		// tabsBody.height(this.options.height);//页面滚动条和自适应的需求，暂时屏蔽该语句（xiran）
 		// 设置Tab的内容的显示状态
@@ -100,7 +100,7 @@ Lazy_Tab = Backbone.View.extend({
 	/* 设置Tab的显示状态 2013-11-12 @param index :显示Tab的索引号 */
 	showTabIndex : function(index) {
 
-		$(this.el).find('#' + this.options.tab_id).children().eq(index).show().siblings().hide();
+		$(this.el).find(this.options.baseEl).children().eq(index).show().siblings().hide();
 		$(this.el).find('.cs2c_tab_title span').eq(index).addClass('cs2c_tabs_selected').siblings().removeClass(
 				'cs2c_tabs_selected');
 	},
@@ -108,7 +108,7 @@ Lazy_Tab = Backbone.View.extend({
 	/* 动态删除Tab页面 2013-11-12 @param index:显示Tab的索引号 */
 	removeTabByIndex : function(index) {
 
-		$(this.el).find('#' + this.options.tab_id).children().eq(index).remove();
+		$(this.el).find(this.options.baseEl).children().eq(index).remove();
 		$(this.el).find('.cs2c_tab_title span').eq(index).remove();
 	}
 });

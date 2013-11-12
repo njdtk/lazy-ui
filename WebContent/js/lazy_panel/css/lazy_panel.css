@@ -84,7 +84,7 @@
 }
 
 .cs2c_dialog_close_btn {
-	background: url("images/panel_tools.gif") no-repeat scroll -18px 5px
+	background: url("../images/panel_tools.gif") no-repeat scroll -18px 5px
 		transparent;
 	cursor: pointer;
 }
@@ -95,7 +95,7 @@
 }
 
 .cs2c_dialog_button {
-	background: url("images/h2_line.png") 0 top repeat-x;
+	background: url("../images/h2_line.png") 0 top repeat-x;
 	padding: 5px;
 	text-align: right;
 }
@@ -129,7 +129,7 @@
 }
 
 a span.dialog-btn-left {
-	background: url("images/btn_bg.png") right bottom no-repeat;
+	background: url("../images/btn_bg.png") right bottom no-repeat;
 	display: inline-block;
 	height: 16px;
 	line-height: 16px;
@@ -170,7 +170,7 @@ a.l-btn {
 	width: auto;
 	height: 16px;
 	padding: 12px 15px 10px 40px;
-	background: #fff url('images/pagination_loading.gif') no-repeat scroll
+	background: #fff url('../images/pagination_loading.gif') no-repeat scroll
 		15px 10px;
 	 border: 1px solid #999; 
 	color: #222;
@@ -182,12 +182,12 @@ a.l-btn {
 }
 
 /* .cs2c_dialog_close_btn{
-background: url("images/panel_tools.gif") no-repeat scroll -16px 0 transparent;
+background: url("../images/panel_tools.gif") no-repeat scroll -16px 0 transparent;
 } */
 .cs2c_wizard_dialog_banner {
 	position: relative;
 	overflow:hidden;
-	background:url("images/wizard_2.gif") repeat-x;
+	background:url("../images/wizard_2.gif") repeat-x;
 	margin: 5px;
 	border-right:1px solid #b1b1b1;
 	border-left:1px solid #b1b1b1;
@@ -204,16 +204,16 @@ background: url("images/panel_tools.gif") no-repeat scroll -16px 0 transparent;
 	display:block;
 	line-height:28px;
 	padding:0 25px 0 15px;
-	background:url("images/wizard_1.gif") right no-repeat;
+	background:url("../images/wizard_1.gif") right no-repeat;
 }
 .prevText span {	
-	background:url("images/wizard_5.gif") right no-repeat;
+	background:url("../images/wizard_5.gif") right no-repeat;
 }
 .redText {
-	background:url("images/wizard_4.gif") repeat-x;
+	background:url("../images/wizard_4.gif") repeat-x;
 }
 .redText span {	
-	background:url("images/wizard_3.gif") right no-repeat;
+	background:url("../images/wizard_3.gif") right no-repeat;
 }
 
 .lastText span {	

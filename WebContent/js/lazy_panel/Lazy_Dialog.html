@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../lib/jquery.js"></script>
+<script type="text/javascript" src="../lib/underscore.js"></script>
+<script type="text/javascript" src="../lib/backbone.js"></script>
+<link rel="stylesheet" href="css/lazy_panel.css">
+<script type="text/javascript" src="Lazy_Dialog.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function() {
+	var dialog = new Lazy_Dialog({
+		baseEl : "#demo_wizard",
+		title : "新建对话框",
+		width : 400,
+		height : 150,
+		closable : true
+	}).render();
+	
+	$('#openDialog').click(function() {
+		dialog.openDialog();
+	});
+};
+</script>
+<div id="demo_wizard">
+	<div>步骤一</div>
+	<div>步骤二</div>
+	<div>步骤三</div>
+	<div>步骤四</div>
+	<div>步骤五</div>
+	<div>完成</div>
+</div>
+<a id="openDialog" href="javascript:void(0)">打开</a>
+</body>
+</html>
