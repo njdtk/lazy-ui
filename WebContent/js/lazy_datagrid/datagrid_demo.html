@@ -11,10 +11,10 @@
 <script src='../lib/laconic.js' type='text/javascript'></script>
 <script src='../lib/backbone_ui.js' type='text/javascript'></script>
 
-<script src='pagerView.js' type='text/javascript'></script>
-<script src='datagridView.js' type='text/javascript'></script>
-<script src='ManageView.js' type='text/javascript'></script>
-<link rel='stylesheet' type='text/css' href='table_view.css'>
+<script src='lazy_Pager.js' type='text/javascript'></script>
+<script src='lazy_Datagrid.js' type='text/javascript'></script>
+<script src='tableManager.js' type='text/javascript'></script>
+<link rel='stylesheet' type='text/css' href='lazy_Datagrid.css'>
 <style>
 	.right_li {
 		width:150px; 
@@ -47,11 +47,12 @@
     $(window).load(function() {
 
     table = new Lazy_Table({
-		  //pagination:true,
-		  parentEl:"#cs2c_datagrid",
-          url:'my.json',
+		  isFrontPagination:true,
+		  baseEl:"#cs2c_datagrid",
+			url:'my.json',
+			//param:{},
 		  
-		 /* data:[{
+		  /*data:[{
 				name:"tenth",
 				number:"10",
 				temp:"yanpeiqiong"
@@ -65,14 +66,14 @@
 				name:"twelve",
 				number:"12",
 				temp:"weiting"
-		  }],*/
-		  
+		  }],
+		  */
           onItemClick : function(model) {
 			//alert("You will delete the row!!");
 			//this.model.remove(model);
 			//this.model.add({"name":"zero","number":"0"});
 			//model.set({"name":"first11"});
-            alert(model.get('name'));
+            alert(model.name);
           },
 	// onRightClick:function(pos){
 			
@@ -105,8 +106,8 @@
 		  }
 		  ],
 		 
-		//code:true,			 
-		checkbox:true,
+		showNumber:true,			 
+		showCheckbox:true,
 		
 		  columns : [
 		  {
@@ -158,8 +159,8 @@
 		  ],
 		  pager:{
 				pageNo:1,
-				pageSize:3,
-				pageList:[3,5,10,15]
+				pageSize:4,
+				pageList:[4,5,10,15]
 		  }
 		  
         });	   
@@ -167,7 +168,7 @@
 
     }).resize(function(){	
 	if(table){
-		table.tableView.resizeTable();
+		table.datagridView.resizeTable();
 		}		
 		});
   </script>
