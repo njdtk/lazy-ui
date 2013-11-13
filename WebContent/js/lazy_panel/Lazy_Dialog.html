@@ -8,6 +8,7 @@
 <script type="text/javascript" src="../lib/backbone.js"></script>
 <link rel="stylesheet" href="css/lazy_panel.css">
 <script type="text/javascript" src="Lazy_Dialog.js"></script>
+<script type="text/javascript" src="Lazy_Mask.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -23,6 +24,13 @@ window.onload = function() {
 	$('#openDialog').click(function() {
 		dialog.openDialog();
 	});
+	$('#openMsg').click(function() {
+		Lazy_Message('成功！');
+		
+		var a = setTimeout(function() {
+			Lazy_Message('成功2！');
+		}, 2000);  
+	});
 };
 </script>
 <div id="demo_wizard">
@@ -33,6 +41,7 @@ window.onload = function() {
 	<div>步骤五</div>
 	<div>完成</div>
 </div>
-<a id="openDialog" href="javascript:void(0)">打开</a>
+<a id="openDialog" href="javascript:void(0)">Open Dialog</a>
+<a id="openMsg" href="javascript:void(0)">Open Message</a>
 </body>
 </html>

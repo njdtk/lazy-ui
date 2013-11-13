@@ -355,3 +355,55 @@ Lazy_Dialog = Backbone.View
 			}
 
 		});
+/**
+ * TODO 组建库的确认提示 by qianqian.yang 2013-4-18
+ */
+Lazy_Confirm = function(msg, fn) {
+
+	var dialogIdDiv = document.createElement("div");
+	dialogIdDiv.id = "confirm_dialog";
+
+	$('body').append(dialogIdDiv);
+	$(dialogIdDiv).html(msg);
+	$(dialogIdDiv).css({
+		padding : '5px',
+		paddingTop : '0px',
+		textAlign : 'center',
+		lineHeight : '20px'
+	});
+
+	// 打开一个确认对胡框
+	var confirm_dialog = new Lazy_Dialog({
+		baseEl : "#confirm_dialog",
+		title : "确认",
+		width : 300,
+		height : 80,
+		closable : false,
+		modal : true
+	}).render();
+	confirm_dialog.openDialog();
+
+	// 销毁该确认对话框
+	var destroyConfirm = function() {
+		var dialog = $(dialogIdDiv).parent().parent();
+		// 删除【确认对话框】的遮罩
+		dialog.next().remove();
+		// 删除【确认对话框】
+		dialog.remove();
+	};
+
+	confirm_dialog.okPressed = function() {
+		destroyConfirm();
+		this.closeDialog();
+		if (fn) {
+			fn(true);
+		}
+	};
+	confirm_dialog.cancelPressed = function() {
+		destroyConfirm();
+		this.closeDialog();
+		if (fn) {
+			fn(false);
+		}
+	};
+};
