@@ -182,7 +182,7 @@ var DatagridView = Backbone.View.extend({
 					//将原始数据转换为{total，list:[1,2]}格式
 					realList = this.options.parse(resp);
 					
-					if(!this.options.isFrontPagination && this.options.pager)){
+					if(!this.options.isFrontPagination && this.options.pager){
 						
 						this.options.pagerModel.set({
 						
