@@ -14,10 +14,14 @@ Lazy_Tab = Backbone.View.extend({
 	},
 
 	events : {
-		"click .cs2c_tab_btn" : "changTab"
+		"click .cs2c_tab_btn" : "_changTab"
 	},
 
 	/* ---------- Private Methods ---------------- */
+
+	render : function() {
+		return this;
+	},
 
 	initialize : function() {
 
@@ -27,12 +31,12 @@ Lazy_Tab = Backbone.View.extend({
 		$(this.options.baseEl).parent().append(this.el);
 
 		// 创建控件内容
-		this.createTabs();
-		this.createTabsBody();
+		this._createTabs();
+		this._createTabsBody();
 	},
 
 	/* 创建选项卡控件的选项标题集合 2013-1-9 */
-	createTabs : function() {
+	_createTabs : function() {
 
 		$(this.el).append('<div class="cs2c_tab_title"></div>');
 
@@ -47,7 +51,7 @@ Lazy_Tab = Backbone.View.extend({
 	},
 
 	/* 创建选项卡控件的选项内容集合 2013-1-9 */
-	createTabsBody : function() {
+	_createTabsBody : function() {
 
 		$(this.el).append($(this.options.baseEl));
 		var tabsBody = $(this.el).find(this.options.baseEl);
@@ -57,12 +61,8 @@ Lazy_Tab = Backbone.View.extend({
 		tabsBody.children().eq(0).show().siblings().hide();
 	},
 
-	render : function() {
-		return this;
-	},
-
 	/* 鼠标点击选项卡标题事件 2013-11-12 @param e */
-	changTab : function(e) {
+	_changTab : function(e) {
 
 		// 同辈中的索引位置
 		var index = $(e.currentTarget).index();

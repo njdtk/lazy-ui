@@ -21,7 +21,7 @@ Lazy_Wizard = Backbone.View
 				okHasUp : true,
 
 				// 是否需要导航显示条
-				banner : true,
+				showBanner : true,
 
 				// 向导步骤的显示名称
 				steps : []
@@ -29,31 +29,6 @@ Lazy_Wizard = Backbone.View
 			},
 
 			/* ------ Private Methods -------------- */
-
-			initialize : function() {
-
-				// 页面选择定位初始化
-				this._pageNum = 1;
-
-				$(this.el).addClass('cs2c_wizard');
-
-				// 在用户创建对话框内容位置创建对话框
-				$(this.options.baseEl).parent().append(this.el);
-
-				if (this.options.banner) {
-					// 创建导航
-					this.createWizardBanner();
-				}
-				// 创建内容
-				this.createWizardCtx();
-				// 创建按钮集合
-				this.createWizardButton();
-
-			},
-
-			events : {
-				"click .cs2c_dialog_button a" : "buttonAction"
-			},
 
 			render : function() {
 
@@ -65,8 +40,33 @@ Lazy_Wizard = Backbone.View
 				return this;
 			},
 
+			initialize : function() {
+
+				// 页面选择定位初始化
+				this._pageNum = 1;
+
+				$(this.el).addClass('cs2c_wizard');
+
+				// 在用户创建对话框内容位置创建对话框
+				$(this.options.baseEl).parent().append(this.el);
+
+				if (this.options.showBanner) {
+					// 创建导航
+					this._createWizardBanner();
+				}
+				// 创建内容
+				this._createWizardCtx();
+				// 创建按钮集合
+				this._createWizardButton();
+
+			},
+
+			events : {
+				"click .cs2c_dialog_button a" : "_buttonAction"
+			},
+
 			/* 创建向导进度步骤条 2013-11-11 */
-			createWizardBanner : function() {
+			_createWizardBanner : function() {
 
 				var bannerStepString = '';
 				var lang = this.options.steps.length;
@@ -82,14 +82,14 @@ Lazy_Wizard = Backbone.View
 			},
 
 			/* 创建向导面板的内容 2013-11-11 */
-			createWizardCtx : function() {
+			_createWizardCtx : function() {
 				$(this.el).append('<div class="cs2c_wizard_dialog_ctx"></div>');
 				$(this.el).find('.cs2c_wizard_dialog_ctx').append($(this.options.baseEl));
 				$(this.el).find('.cs2c_wizard_dialog_ctx').height(this.options.height);
 			},
 
 			/* 创建向导面板的button区域 2013-11-11 */
-			createWizardButton : function() {
+			_createWizardButton : function() {
 				$(this.el).append('<div class="cs2c_dialog_button"></div>');
 
 				var dialog_btn = $(this.el).find('.cs2c_dialog_button');
@@ -118,7 +118,7 @@ Lazy_Wizard = Backbone.View
 			},
 
 			/* 控制向导面板的界面显示 2013-11-11 @param pageNum：从1开始 */
-			componentDisplayController : function(pageNum) {
+			_componentDisplayController : function(pageNum) {
 
 				var dialog_btn = $(this.el).find('.cs2c_dialog_button');
 
@@ -168,7 +168,7 @@ Lazy_Wizard = Backbone.View
 			},
 
 			/* 上下步、完成等的按钮的执行动作 2013-11-11 @param e：鼠标点击事件 */
-			buttonAction : function(e) {
+			_buttonAction : function(e) {
 
 				var btnClass = e.currentTarget.className.split(" ")[1];
 
@@ -194,7 +194,7 @@ Lazy_Wizard = Backbone.View
 					break;
 				}
 
-				this.componentDisplayController(this._pageNum);
+				this._componentDisplayController(this._pageNum);
 
 			},
 
@@ -223,7 +223,7 @@ Lazy_Wizard = Backbone.View
 			showWizardStep : function(index) {
 
 				this._pageNum = index + 1;
-				this.componentDisplayController(index + 1);
+				this._componentDisplayController(index + 1);
 			},
 
 			/* 隐藏向导的部分步骤（包括进度指示条以及内容） 2013-11-11 @param index：从0开始检索 */
