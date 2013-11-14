@@ -1,3 +1,8 @@
+/*
+ * Lazy_Switch.js
+ * Start by @author XIran.Liu on Date:2013-6-1
+ * Update by @author QQ.Y on Data:2013-11-14
+ */
 (function($) {
 
 	Lazy_ValidateBox = Backbone.View

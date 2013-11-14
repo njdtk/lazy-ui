@@ -1,3 +1,8 @@
+/*
+ * Lazy_Tab.js
+ * Start by @author QQ.Y on Date:2013-6-1
+ * Update by @author QQ.Y on Data:2013-11-14
+ */
 Lazy_Tab = Backbone.View.extend({
 
 	/* ---------- Private properties ---------------- */

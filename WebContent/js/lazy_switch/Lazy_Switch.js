@@ -1,3 +1,8 @@
+/*
+ * Lazy_Switch.js
+ * Start by @author Hong.Yang on Date:2013-6-1
+ * Update by @author QQ.Y on Data:2013-11-14
+ */
 $(function() {
 	Lazy_Switch = Backbone.View.extend({
 

@@ -1,3 +1,8 @@
+/*
+ * Lazy_ComboBox.js
+ * Start by @author Xiran.Liu on Date:2013-6-1
+ * Update by @author QQ.Y on Data:2013-11-14
+ */
 $(function() {
 	Lazy_ComboBox = Backbone.View
 			.extend({
@@ -53,6 +58,8 @@ $(function() {
 
 				},
 
+				/*--------------------- Private Methods ---------------------*/
+
 				initialize : function() {
 					_.bindAll(this, 'render', 'createComboBox', 'createListByData', 'eventBind');
 
@@ -91,6 +98,7 @@ $(function() {
 
 				},
 
+				/* 创建ComboBoxd的DOM结构 2013-11-14 */
 				createComboBox : function() {
 
 					this.comboArrow = $('<div class="combobox_arrow"><img src="img/combo-arrow.png"></div>');
@@ -105,9 +113,7 @@ $(function() {
 
 				},
 
-				/**
-				 * list渲染函数
-				 */
+				/* 通过数据绘制下拉列表 2013-11-14 */
 				createListByData : function() {
 					var listData = "", listTempArray = [];
 					if (this.options.listData) {
@@ -159,9 +165,7 @@ $(function() {
 					}
 				},
 
-				/**
-				 * list定位
-				 */
+				/* 下拉框的下拉列表位置控制 2013-11-14 */
 				cssPosition : function() {
 					var p_y = this.comboInput.offset().top + this.comboInput.height() + 2;
 					var p_x = this.comboInput.offset().left;
@@ -171,9 +175,7 @@ $(function() {
 					});
 				},
 
-				/**
-				 * 事件绑定函数
-				 */
+				/* 事件绑定函数 2013-11-14 */
 				eventBind : function() {
 
 					$(this.options.baseEl).find('.combobox_arrow').unbind('click');
@@ -222,11 +224,7 @@ $(function() {
 
 				},
 
-				/**
-				 * listitem点击处理管理函数
-				 * 
-				 * @param event
-				 */
+				/* 下拉框的Item选项的点击处理管理函数 2013-11-14 @param event */
 				clickAction : function(event) {
 
 					if (this.options.multiple) {
@@ -236,11 +234,7 @@ $(function() {
 					}
 				},
 
-				/**
-				 * 单选模式点击处理函数
-				 * 
-				 * @param event
-				 */
+				/* 单选模式点击处理函数 2013-11-14 @param event */
 				singleClick : function(event) {
 					this.comboListDom.find('.combobox_list_item').removeClass('list_item_cover');
 					$(event.currentTarget).addClass('list_item_cover');
@@ -256,11 +250,7 @@ $(function() {
 					this.comboListDom.hide();
 				},
 
-				/**
-				 * 多选模式点击处理函数
-				 * 
-				 * @param event
-				 */
+				/* 多选模式点击处理函数 2013-11-14 @param event */
 				multipleClick : function(event) {
 					if ($(event.currentTarget).hasClass('list_item_cover')) {
 						$(event.currentTarget).removeClass('list_item_cover');
@@ -287,9 +277,7 @@ $(function() {
 
 				},
 
-				/**
-				 * 重新渲染list
-				 */
+				/* 重新渲染list数据下拉框区域 2013-11-14 */
 				reRenderComboListDom : function() {
 					this.comboPager = 1;
 					this.comboInput.val('');
@@ -301,9 +289,7 @@ $(function() {
 
 				},
 
-				/**
-				 * 数据渲染函数 重新包装一下需要的字段
-				 */
+				/* 数据渲染函数 重新包装一下需要的字段 2013-11-14 */
 				dataAjax : function() {
 					this.comboListDomData = {
 						'count' : null,
@@ -340,9 +326,7 @@ $(function() {
 					});
 				},
 
-				/**
-				 * 更多的处理函数
-				 */
+				/* 【更多】的处理函数 2013-11-14 */
 				moreAction : function() {
 					this.comboPager++;
 					this.dataAjax();
@@ -350,9 +334,7 @@ $(function() {
 					this.eventBind();
 				},
 
-				/**
-				 * 全选的处理函数
-				 */
+				/* 【全选】的处理函数 2013-11-14 */
 				selectAll : function() {
 					var itemList = this.comboListDom.find('.combobox_list_item');
 					$.each(itemList, _(function(i, item) {
@@ -367,9 +349,7 @@ $(function() {
 					this.comboInput.val(this.inputShowArray.join('，'));
 				},
 
-				/**
-				 * 全部选的处理函数
-				 */
+				/* 【全不选】的处理函数 2013-11-14 */
 				clearAll : function() {
 					var itemList = this.comboListDom.find('.combobox_list_item');
 					$.each(itemList, _(function(i, item) {
@@ -383,16 +363,14 @@ $(function() {
 					this.comboInput.val('');
 				},
 
-				/**
-				 * 获取combobox的值
-				 * 
-				 * @returns：逗号分隔的字符串
-				 */
+				/* 获取combobox的输入选择的值 2013-11-14 @returns 逗号分隔的字符串 */
 				getComboVal : function() {
 					return this.inputDataArray.join(',');
 				},
+
+				/* 获取点击请求页数 2013-11-14 @returns {Number} */
 				getPageNo : function() {
-					return this.comboPager;// 获取点击请求页数
+					return this.comboPager;
 				}
 
 			});

@@ -1,3 +1,8 @@
+/*
+ * Lazy_Dialog.js
+ * Start by @author QQ.Y on Date:2013-6-1
+ * Update by @author QQ.Y on Data:2013-11-14
+ */
 zIndex = 9000;
 Lazy_Dialog = Backbone.View
 		.extend({
