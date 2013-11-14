@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="lazy_switch.css">
+		<script src="../lib/jquery.js"></script>
+		<script src="../lib/underscore.js"></script>
+		<script src="../lib/backbone.js"></script>
+		<script src="Lazy_Switch.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.onload = function() {
+				var aa = new Lazy_Switch({
+					baseEl : '#aaa',
+					isOpen : true,
+					action : function() {
+						console.log(aa.val);
+					}
+				});
+		
+				$('button').click(function() {
+					alert(aa.val);
+		
+				});
+			};
+		</script>
+	<div>
+		
+		<div id="aaa"></div>		
+		<button>点击</button>
+		
+	</div>
+	</body>
+</html>

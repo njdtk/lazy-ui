@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="lazy_validatebox.css">
+		<script src="../lib/jquery.js"></script>
+		<script src="../lib/underscore.js"></script>
+		<script src="../lib/backbone.js"></script>
+		<script src="Lazy_ValidateBox.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.onload = function() {
+				var testdemo = new Lazy_ValidateBox({
+					baseEl:'#validatebox1',
+					tipmsg:'请输入正整数',
+					reqmsg:'必填项',
+					reg_exp:/^[1-9][0-9]*$/
+					});
+				
+				$('button').click(function() {
+					testdemo.inputValidate();
+				});
+				
+				$('#validatebox2').Lazy_ValidateBox('请输入正整数',/^[1-9][0-9]*$/,true);
+			};
+		</script>
+	<div>
+		<ul>
+			<li>
+				请输入正整数
+			</li>
+			<li>
+				<span>测试1：</span><input id="validatebox1" required/>
+			</li>
+			<li>
+				<span>测试2：</span><input id="validatebox2" required/>
+			</li>	
+			<li><button>点击</button></li>	
+		</ul>
+	</div>
+	</body>
+</html>

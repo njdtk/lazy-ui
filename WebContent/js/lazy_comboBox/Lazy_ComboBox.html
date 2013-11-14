@@ -1,0 +1,61 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta content="charset=UTF-8">
+<link rel='stylesheet' type='text/css' href='lazy_combobox.css'>
+
+</head>
+<body>
+
+<!-- 带分页，多选，动态数据 -->
+<div id="test1"></div>
+
+<!-- 单选，不带分页，静态数据 -->
+<div id="test2"></div>
+
+<button id="getValue">获取combo的值</button>
+<button id="reFresh">刷新</button>
+</body>
+<script src="../lib/jquery.js"></script>
+<script src="../lib/underscore.js"></script>
+<script src="../lib/backbone.js"></script>
+<script src="Lazy_ComboBox.js"></script>
+<script>
+	
+
+	$(function($){
+		
+		
+		var a = new Lazy_ComboBox({
+			baseEl:'#test1',
+			remote:{
+				url : 'comboData.json',
+				url_param : {
+					method:'',
+				},
+				parse:function(data){
+					return data.msg.data.rows;
+				},
+				name:'id',
+				showText:'name'
+			}
+			
+		});
+		var b = new Lazy_ComboBox({
+			baseEl:'#test2',
+			multiple:false,//单选
+			more:false,//不分页
+			listData:{
+				count:0,
+				list:[{name:'传值1',showText:'显示值1'},{name:'传值2',showText:'显示值2'}]
+			}
+		});
+		$('#getValue').click(function(){
+			console.log(a.getComboVal());
+		});
+		$('#reFresh').click(function(){
+			a.reRenderComboListDom();
+		});
+	});
+</script>
+</html>

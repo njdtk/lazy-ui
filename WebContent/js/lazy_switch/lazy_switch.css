@@ -1,0 +1,32 @@
+.slide_btn {
+	cursor: pointer;
+	border-radius: 2px;
+	width: 68px;
+	height: 20px;
+	border: 1px solid #999;
+	color: #000;
+	background: #ddd;
+	font-family: "微软雅黑";
+	font-size: 12px;
+}
+
+.slide_btn div {
+	width: 48px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 2px;
+}
+
+.on {
+	float: left;
+	background: #8d8d8d;
+	border-right: 1px solid #999;
+	color: #fff;
+}
+
+.off {
+	float: right;
+	background: #efefef;
+	border-left: 1px solid #999;
+}
