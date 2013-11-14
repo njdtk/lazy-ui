@@ -1,115 +1,136 @@
 /**
- * cs2c_rightMenuV0.1
+ * Lazy_RightMenu V2.0
  * @author peiqiong.yan
  * started on 2013.04.17 
  * completed on 2013.04.18
  * update on 2013.06.07
- *
+ * update on 2013.11.14
  */
  
- var RightMenuView = {
  
+ 
+ /**
+  * 定义右键菜单组件
+  */
+ var Lazy_RightMenu = {
+	
+	/**
+	 * 初始化操作
+	 */
 	initialize:function(paramObj){
 		
+		//初始化全局变量
+		//初始化触发事件
 		this.e = paramObj.e;
 		
+		//初始化对应的数据对象
 		this.model = paramObj.model;
 		
 		//右键菜单显示项
 		this.options = paramObj.options.list;
 		
+		//右键菜单项点击处理函数
 		this.optFunc = paramObj.options.optFunc;
 		
+		//
 		if( paramObj.options.optFilter && _(paramObj.options.optFilter).isFunction() ){
 			
 			this.optFilter = paramObj.options.optFilter;
 			
 		}
 		
-		//console.log(this.optFunc)
-		if(paramObj.prevId){
-			this.prevId=paramObj.prevId;
-		}
-		this.el="#"+this.prevId+"_"+"rightMenu";
-		//console.log(this.model);
-		//console.log(this.options);
+		//右键点击的有效区域
+		this.prevEl=paramObj.el;
+		
+		//生成右键菜单项的el
+		this.el=paramObj.el+"_rightMenu";
+		
+		//右键菜单渲染
 		this.render();
 	},
 	
+	/**
+	 * 右键菜单解析和绘制
+	 *
+	 */
 	render:function(){
-		//do something here
 		
-		this.createMenu();
+		
+		this._createMenu();
 		
 		//如果需要对右键菜单进行过滤，则执行该代码段
 		if(this.optFilter){
 			this.optFilter(this.model);
 		}
 		
-		this.bindEvents();
-		this.showMenu();
+		this._bindEvents();
+		this._showMenu();
 	},
 	
-	createMenu:function(){
+	/**
+	 * 创建菜单栏
+	 *
+	 */
+	_createMenu:function(){
+	
+		//在body里拼接一个用于显示右键菜单的空容器
 		$(this.el).remove();
-		$("body").append("<div id='"+this.prevId+"_rightMenu"+"' class='cs2c_rightMenu'></div>");
+		$("body").append("<div id='"+this.el.split("#")[1]+"' class='lazy_rightMenu'></div>");
 		$(this.el).hide();
 		
-		//$(this.el).append("<ul class='ul_rightMenu'></ul>");
-		
-		
+		//遍历自定义参数对象，逐步进行菜单项绘制
 		for(var i=0; i<this.options.length; i++){
 			if(i!=0){
 				$(this.el).append("<span class='li_right_nline'>---------------</span><br>");
 			}
 			for(var j=0; j<this.options[i].length; j++){
-				var curData = this.options[i][j];
-				$(this.el).append(this.eletmpl(curData));
+				var curOption = this.options[i][j];
+				$(this.el).append(this._eletmpl(curOption));
 			}
 		}
 	},
 	
 	/**
-	 *事件绑定：
-	 *1）左击时隐藏右键菜单
+	 * 事件绑定：
+	 * 1）左击时隐藏右键菜单
+	 * 2）鼠标移至菜单项之上时，添加突出该菜单项的样式
+	 * 3）鼠标移出菜单项之上时，取消突出该菜单项的样式
 	 */
-	bindEvents:function(){
+	_bindEvents:function(){
 		
-		$("#"+this.prevId).unbind("click");
+		$(this.prevEl).unbind("click");
 		
-		$("#"+this.prevId).bind("click",_(function(e){
+		$(this.prevEl).bind("click",_(function(e){
 			$(this.el).hide();
 		}).bind(this));
 			
 		
-		$(".li_right_rline").bind("mouseover",_(function(e){
+		$(this.el).find(".li_right_rline").bind("mouseover",_(function(e){
 			$(e.currentTarget).addClass("node_mouseover");
 			
 		}).bind(this));
 		
-		$(".li_right_rline").bind("mouseout",_(function(e){
+		$(this.el).find(".li_right_rline").bind("mouseout",_(function(e){
 			$(e.currentTarget).removeClass("node_mouseover");
 			
 		}).bind(this));
 	},
-	/*
-	var strAppend="<span onclick='javascript: del("+JSON.stringify({"name":"noyes"})+")' style='cursor:pointer'>"
-				+"<img src='img/plus.gif'/>"
-				+"<img src='img/page.gif'/>"
-				+"</span><br>"
-
 	
-	$("#cs2c_dtree").append(strAppend);
-    });
-	*/
-	eletmpl:function(data){
-		//this.model.optParam=data.optFunc;
-		var returnVal = "<span class='li_right_rline' name='li_"+data.optParam+"' onclick='javascript:"
-					+"RightMenuView.optFunc("+JSON.stringify(data.optParam)+","+JSON.stringify(this.model)+")' >"+data.optName+"</span><br>";
+	
+	/**
+	 * 根据具体的菜单项参数，绘制菜单项元素，并绑定单击事件处理方法
+	 */
+	_eletmpl:function(option){
+		//this.model.optParam=option.optFunc;
+		var returnVal = "<span class='li_right_rline' name='li_"+option.optParam+"' onclick='javascript:"
+					+"Lazy_RightMenu.optFunc("+JSON.stringify(option.optParam)+","+JSON.stringify(this.model)+")' >"+option.optName+"</span><br>";
 		return returnVal;
 	},
 	
-	showMenu:function(){
+	/**
+	 * 在右键点击处渲染菜单项内容
+	 */
+	_showMenu:function(){
 		var e= this.e || window.event;
 		var pos={};
 		//console.log(e.button);
@@ -120,9 +141,9 @@
 			
 			$(this.el)[0].style.left = pos.x+'px';
 			$(this.el)[0].style.top = pos.y+'px';
-			//PopMenu.style.top="0px";
+			
 			$(this.el).show();
-			//prevent the default behavior
+			
 			if (document.all) {
 				window.event.returnValue = false;
 			}// for IE

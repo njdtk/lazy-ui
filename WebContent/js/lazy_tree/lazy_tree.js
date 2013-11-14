@@ -22,7 +22,9 @@ var Lazy_Tree = Backbone.View.extend({
 		
 		//objName: "dtree",
 		
-		onItemClick:function(){}
+		onItemClick:function(){},
+		
+		rightMenu: null
 	},
 	
 	
@@ -600,27 +602,26 @@ var Lazy_Tree = Backbone.View.extend({
 	
 		var allSpans = $(this.el).find("span");
 		var options = this.options.rightMenu;
-		var prevId = this.options.objName;
+		var el = this.el;
 		
 		for(var i=0; i<allSpans.length; i++){
 		
-			var curIndex = this._getIndex($(allSpans[i]).parent());
-			
+			var curIndex = this._getIndex($(allSpans[i]).parent());			
 			
 			//绑定右键处理方法
 			allSpans[i].oncontextmenu=function(model) {
 				return function(e){
 					//显示右键菜单
-					RightMenuView.initialize({"e":e,"model":model,"options":options,"prevId":prevId});
+					Lazy_RightMenu.initialize({"e":e,"model":model,"options":options,"el":el});
 				};
 			}(this.allNodes[curIndex].model);
 		}
 		
 		
 			 
-			if (window.Event){
-				document.captureEvents(Event.MOUSEUP);
-			}	
+		if (window.Event){
+			document.captureEvents(Event.MOUSEUP);
+		}	
 			
 			
 	},

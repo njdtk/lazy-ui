@@ -1,5 +1,5 @@
 /*--------------------------------------------------|
-| cs2c_dtreeV0.1 | www.destroydrop.com/javascript/tree/ |
+| Lazy_Tree V2.0 | www.destroydrop.com/javascript/tree/ |
 |---------------------------------------------------|
 | Copyright (c) 2002-2003 Geir Landr�               |
 |--------------------------------------------------*/
@@ -14,7 +14,7 @@
 	color: #0033FF;
 }
 
-.cs2c_rightMenu {
+.lazy_rightMenu {
 	width:150px;
 	position:absolute;
 	z-index: 1000;
