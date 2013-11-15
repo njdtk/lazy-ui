@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Create the Lazy ProgressBar</title>
+<link rel="stylesheet" href="lazy_progressbar.css">
+<script src="../lib/jquery.js"></script>
+<script src="Lazy_ProgressBar.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function() {
+	$('#demo').Lazy_ProgressBar(75);
+	
+	
+	$('#p').Lazy_ProgressBar(0);
+	function test(){
+		var value = $('#p').Lazy_ProgressBar('getValue');
+		if (value < 100){
+			value += Math.floor(Math.random() * 10);
+			$('#p').Lazy_ProgressBar('setValue', value);
+			setTimeout(arguments.callee, 200);
+		}
+	}
+	
+	test();
+};
+</script>
+<div id="demo"></div>
+<div id="p"></div>
+
+</body>
+</html>

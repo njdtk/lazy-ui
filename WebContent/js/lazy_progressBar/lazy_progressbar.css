@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+.progressbar{
+	border:1px solid #D3D3D3;
+	border-radius:5px;
+	overflow:hidden;
+	height:16px
+}
+.progressbar-text{
+	text-align:center;
+	color:#000;
+	border-radius:5px;
+	position:absolute;
+	line-height:16px;
+	height:16px
+}
+.progressbar-value{
+	background-color:green;
+	border-radius:5px;
+	width:0;
+	height:16px
+}
