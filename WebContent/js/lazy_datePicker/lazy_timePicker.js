@@ -268,8 +268,6 @@ Lazy_TimePicker = Backbone.View.extend({
 		return poz;
 	},
 
-	/* ---------- Public Methods ---------------- */
-
 	getSelect : function(poz) {
 		if (!poz) {
 			poz = this.formatPoz(this.selection.getCaret().start);
