@@ -197,14 +197,14 @@ var	Lazy_SelectBox = Backbone.View.extend({
 					if(!!curData.name){
 						
 						$righItem = $('<div class="select-body-item">'+
-										'<p name="'+curData[i].name+'">'+curData[i].content+'</p>'+
+										'<p name="'+curData.name+'">'+curData.content+'</p>'+
 										'<p class="select-right-arrow" style="display:none"></p>'+
 									'</div>');
 						
 					}else{
 					
 						$righItem = $('<div class="select-body-item">'+
-										'<p>'+curData[i].content+'</p>'+
+										'<p>'+curData.content+'</p>'+
 										'<p class="select-right-arrow" style="display:none"></p>'+
 									'</div>');
 					}

@@ -5,18 +5,51 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<div id="select_test" class="cs2c-selectbox"></div>
-
+<div id="lazy_selectBox" ></div>
+<div id="mm" style="margin-top:20px">
+	<div>
+		<input type="button" value="获取所选列表" onclick="getSelectedList()" /> 
+		
+	</div>
 </body>
+<link rel="StyleSheet" href="lazy_selectbox.css" type="text/css" />
 <script src="../lib/jquery.js"></script>
 <script src="../lib/underscore.js"></script>
 <script src="../lib/backbone.js"></script>
-<script src="cs2c_selectbox.js"></script>
+<script src="lazy_selectbox.js"></script>
 <script>
+
+var getSelectedList=function (){
+			
+	alert(JSON.stringify(selectBox.getList()));
+	
+			
+};
+
 $(function(){
-	new selectedBoxView({
-		'parentElId':'select_test',
-		'areaTitle':['左侧选择区','右侧选择区']
+	selectBox=new Lazy_SelectBox({
+		'baseEl':'#lazy_selectBox',
+		'areaTitle':['左侧选择区','右侧选择区'],				
+		'areaHeight':110,
+		'areaWidth':185,
+		'leftData':[
+				{content:'peiqiong',name:'ypq'},
+				{content:'tianlei',name:'tl'},
+				{content:'qianqian.yang',name:'yqq'},
+				{content:'yanghong',name:'yh'},
+				{content:'lanjun',name:'lj'},
+				{content:'xiran.liu',name:'lxr'}
+
+		],
+		'rightData':[
+				{content:'yuanyuan.tian',name:'tyy'},
+				{content:'wangzhuo',name:'wz'},
+				{content:'huminjie',name:'hmj'}
+
+		],
+		
+		'getField':'name'
+						
 	});
 	/*$('.select-body-item').mouseover(function(){
 		var tempthis = this;
