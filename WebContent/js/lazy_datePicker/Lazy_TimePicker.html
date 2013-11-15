@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Create the Lazy ProgressBar</title>
+<link rel="stylesheet" href="lazy_datePicker.css">
+<script type="text/javascript" src="../lib/jquery.js"></script>
+<script type="text/javascript" src="../lib/underscore.js"></script>
+<script type="text/javascript" src="../lib/backbone.js"></script>
+<script src="lazy_timePicker.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function() {
+	var time1 = new Lazy_TimePicker({
+		baseEl:'#time1',
+		'start':'08:30',
+		'over':'09:10'
+	});
+};
+</script>
+<div id="time1"></div>
+
+</body>
+</html>
