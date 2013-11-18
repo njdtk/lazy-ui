@@ -3,6 +3,8 @@
  * Start by @author Hong.Yang on Date:2013-6-1
  * Update by @author QQ.Y 【Add Comments and Modify the baseEl】on Data:2013-11-14
  */
+
+(function($) {
 var Selection = {
 		
         init:function(input){
@@ -73,8 +75,14 @@ var Selection = {
         	i.value = s.slice(0, o.start) + text + s.slice(o.end);
         	this.setCaret(o.start += text.length, o.start);
         }	
-};     	
-Lazy_TimePicker = Backbone.View.extend({
+};
+
+/**
+ * TODO 时间选择器的类
+ * 
+ * @author QQ.Y
+ */
+var Lazy_TimePicker = Backbone.View.extend({
 
 	/* ---------- Private properties ---------------- */
 
@@ -276,6 +284,22 @@ Lazy_TimePicker = Backbone.View.extend({
 		this.text.focus();
 	}
 });
+
+	/**
+	 * TODO jQuery插件方法封装Lazy_TimePicker
+	 * 
+	 * @author QQ.Y
+	 */
+	$.fn.Lazy_TimePicker = function(startTime,overTime) {
+		return new Lazy_TimePicker({
+			baseEl:this.selector,
+			start:startTime,
+			over:overTime
+		});
+	};
+
+})(jQuery);
+
 
 	
 

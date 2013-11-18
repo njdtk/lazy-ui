@@ -36,6 +36,8 @@ Lazy_Dialog = Backbone.View
 				// 是否显示背景蒙板
 				modal : true,
 
+				draggable : true,
+
 				// 对话框的绝对定位，如果有位置的定义，则如下：position:{x:100,y:200}
 				position : {
 					x : 0,
@@ -178,12 +180,20 @@ Lazy_Dialog = Backbone.View
 
 			/* 变换鼠标显示状态，移动 2012-12-5 @param e */
 			_mouseMoveDone : function(e) {
+
+				if (!this.options.draggable) {
+					return;
+				}
 				var header = e.currentTarget;
 				header.style.cursor = "move";
 			},
 
 			/* 左键控制鼠标的移动 2012-12-5 @param e */
 			_mouseDownDone : function(e) {
+
+				if (!this.options.draggable) {
+					return;
+				}
 
 				e = e || event;
 				var moveObj = $(e.currentTarget).parent();
