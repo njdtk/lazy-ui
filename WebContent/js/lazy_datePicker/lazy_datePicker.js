@@ -144,9 +144,10 @@ var	Lazy_DatePicker = Backbone.View.extend({
 			baseEl : '',
 			
 			//指定日期显示格式,支持三种格式，即'yyyy-mm-dd'，'yyyy/mm/dd','m/d/yyyy'
-			formatter : 'yyyy-mm-dd'// 
+			formatter : 'yyyy-mm-dd',
 			
-			showInitDate : false,// 初始化时input框中是否有值 默认无false，true初始化为当前系统时间
+			// 初始化时input框中是否有值 默认无false，true初始化为当前系统时间
+			showInitDate : true,
 			
 			//是否显示时间控件
 			showTimePicker : false
@@ -160,7 +161,7 @@ var	Lazy_DatePicker = Backbone.View.extend({
 			_.bindAll(this, 'render', 'showCalendar');
 			
 			//触发日期控件的input元素
-			this.el=this.options.baseEl;
+			this.baseEl=this.options.baseEl;
 			
 			//初始化年、月、日，默认为当前时间
 			this.year = new Date().getFullYear();
@@ -169,13 +170,13 @@ var	Lazy_DatePicker = Backbone.View.extend({
 			
 			this.day = new Date().getDate();
 			
-			$(this.el).unbind('focus');
+			$(this.baseEl).unbind('focus');
 			
 			//解析和绘制日期控件		
 			this.render();
 			
 			//聚焦指定输入框时，显示日期控件
-			$(this.el).bind('focus', this.showCalendar);
+			$(this.baseEl).bind('focus', this.showCalendar);
 			
 		},
 		
@@ -186,9 +187,9 @@ var	Lazy_DatePicker = Backbone.View.extend({
 		
 			this.mainView = new mainPickerView(this.year, this.month, this.day, this.options);
 			
-			if (this.options.timePicker) {
-				this.timePicker = new Lazy_TimePicker({
-					'baseEl' : this.el+ '_time_body'
+			if (this.options.showTimePicker) {
+				this.showTimePicker = new Lazy_TimePicker({
+					'baseEl' : this.baseEl+ '_time_body'
 				});
 			}
 		},
@@ -196,10 +197,10 @@ var	Lazy_DatePicker = Backbone.View.extend({
 		showCalendar : function() {
 			
 			this.mainView.container.show();
-			if (!$(this.el).val()) {
+			if (!$(this.baseEl).val()) {
 				this.mainView.showCalendar(this.year, this.month, this.day.toString());
-				if (this.timePicker) {
-					this.timePicker.setValue();
+				if (this.showTimePicker) {
+					this.showTimePicker.setValue();
 				}
 			} else {
 				this.mainView.container.show();
@@ -219,9 +220,11 @@ var	Lazy_DatePicker = Backbone.View.extend({
 					
 					this.options = options;
 					
-					this.el = options.baseEl;
+					this.baseEl = options.baseEl;
 					
-					this.containerId = this.el.split("#")[1]+"_container";
+					this.el = $(this.baseEl).parent();
+					
+					this.containerId = this.baseEl.split("#")[1]+"_container";
 					
 					this.year = this.yearTemp = year || new Date().getFullYear();
 					
@@ -248,7 +251,7 @@ var	Lazy_DatePicker = Backbone.View.extend({
 					
 					if ($('#'+this.containerId).length === 0) {
 						//创建用户显示日期控件的容器
-						this.container = $('<div id="'this.containerId+'" class="cs2c_date_picker"></div>');
+						this.container = $('<div id="'+this.containerId+'" class="lazy_date_picker"></div>');
 						
 						//往容器中添加两个元素：日期头部容器和日期主体容器
 						this.container.append('<div class="date_title">'
@@ -257,8 +260,8 @@ var	Lazy_DatePicker = Backbone.View.extend({
 									+ '<div id="date_move_right" class="date_move_right" style="float:right"></div>' 
 								+ '</div>'
 								+ '<div id="date_body" class="date_body">'
-									+ '<div class="date_table_title"></div>' 
-									+ '<div class="date_table_content"></div>'
+									+ '<div id="date_table_title" class="date_table_title"></div>' 
+									+ '<div id="date_table_content" class="date_table_content"></div>'
 								+ '</div>' 
 								+ '<span id="time_body" class="spinner"></span>'
 								+ '<div class="date_button">' 
@@ -272,7 +275,7 @@ var	Lazy_DatePicker = Backbone.View.extend({
 					}
 					
 					//将日期控件容器拼接到指定输入框之后
-					$(this.el).parent().append(this.container);
+					$(this.baseEl).parent().append(this.container);
 					
 					
 					this.showCalendar(renderyear, rendermonth, renderformattedDate); //??
@@ -320,7 +323,7 @@ var	Lazy_DatePicker = Backbone.View.extend({
 					}
 					
 					//根据flag字段设置输入框显示内容
-					$(this.el).val(flag ? showDate : '');
+					$(this.baseEl).val(flag ? showDate : '');
 					
 					return showDate;
 				},
@@ -356,7 +359,7 @@ var	Lazy_DatePicker = Backbone.View.extend({
 				setCalendarContent : function(year, month, formattedDate) {
 					
 					//定义日期头部显示内容
-					var $dateTitle = $('<span><span id="cs2c_datepicker_year">2013</span>年<span id="cs2c_datepicker_month">6</span>月</span>'),
+					var $dateTitle = $('<span><span id="lazy_datepicker_year">2013</span>年<span id="lazy_datepicker_month">6</span>月</span>');
 					
 					//定义日期控件表格盘的基本显示内容
 					var $dateBody = $('<div class="date_table_title">'
@@ -372,7 +375,7 @@ var	Lazy_DatePicker = Backbone.View.extend({
 								+ '</tr>'
 							+ '</table>'
 							+ '</div>'
-							+ '<div class="date_table_content">'
+							+ '<div id="date_table_content" class="date_table_content">'
 								+ '<table></table>' 
 							+ '</div>');
 					
@@ -383,8 +386,8 @@ var	Lazy_DatePicker = Backbone.View.extend({
 					$(this.container).find('#date_body').empty().append($dateBody);
 					
 					//设置日期头部中的年份和月份信息
-					$(this.container).find('#cs2c_datepicker_year').text(year);
-					$(this.container).find('#cs2c_datepicker_month').text(month);
+					$(this.container).find('#lazy_datepicker_year').text(year);
+					$(this.container).find('#lazy_datepicker_month').text(month);
 					
 					//设置日期控件表格盘显示内容及样式
 					this.setTableContent(formattedDate);
@@ -399,23 +402,23 @@ var	Lazy_DatePicker = Backbone.View.extend({
 					
 					//表格盘中方格点击处理逻辑绑定
 					$('#date_table_content').find('td').unbind('click');
-					$('#date_table_content').find('td').bind('click', this.itemClick);
+					$('#date_table_content').find('td').bind('click', _(this.itemClick).bind(this));
 					
 					//'今天'按钮点击处理逻辑绑定
 					$('#date_button_today').unbind('click');
-					$('#date_button_today').bind('click', this.todayBtnClick);
+					$('#date_button_today').bind('click', _(this.todayBtnClick).bind(this));
 					
 					//‘确定’按钮点击处理逻辑绑定
 					$('#date_button_ok').unbind('click');
-					$('#date_button_ok').bind('click', this.okBtnClick);
+					$('#date_button_ok').bind('click', _(this.okBtnClick).bind(this));
 					
 					//‘关闭’按钮点击处理逻辑绑定
 					$('#date_button_off').unbind('click');
-					$('#date_button_off').bind('click', this.closeBtnClick);
+					$('#date_button_off').bind('click', _(this.closeBtnClick).bind(this));
 					
 					//左右选按钮点击处理逻辑绑定
 					$('#date_move_left,#date_move_right').unbind('click');
-					$('#date_move_left,#date_move_right').bind('click',this.titleMove);
+					$('#date_move_left,#date_move_right').bind('click',_(this.titleMove).bind(this));
 					
 				},
 				
@@ -466,20 +469,35 @@ var	Lazy_DatePicker = Backbone.View.extend({
 				 * 表格盘中方格点击处理
 				 */
 				itemClick : function(event) {
+				
 					var event = event || window.event;
-					this.dayTemp = $(event.currentTarget).text();
-					$(event.currentTarget).parent().parent().parent().find('td').removeClass('date_selected');
-					$(event.currentTarget).addClass('date_selected');
-
+					
+					//如果点击的方格属于当前月份值，则更改全局变量dayTemp，并修改选择样式
+					//否则不响应点击操作					
+					if($(event.currentTarget).text()){
+					
+						this.dayTemp = $(event.currentTarget).text();
+						$(event.currentTarget).parent().parent().parent().find('td').removeClass('date_selected');
+						$(event.currentTarget).addClass('date_selected');
+					}
+					
 				},
 				
 				/**
 				 * '今天'按钮点击处理
 				 */
 				todayBtnClick : function() {
-					this.options.timePicker ? this.dateformatter(this.year, this.month, this.day, 0)
-						: this.dateformatter(this.year, this.month, this.day, 1);
-					this.setCalendarContent(this.year, this.month, this.formattedDate, this.options);
+					this.options.showTimePicker ? this.dateformatter(this.year, this.month, this.day, false)
+						: this.dateformatter(this.year, this.month, this.day, true);
+					
+					//将选择值设置为当前日期对应的年、月、日
+					this.yearTemp=this.year;
+					this.monthTemp=this.month;
+					this.dayTemp=this.day;
+					
+					//重新设置日期表格盘内容并绑定事件
+					this.setCalendarContent(this.year, this.month, this.formattedDate);
+					this.bindEvents();
 				},
 				
 				
@@ -487,15 +505,18 @@ var	Lazy_DatePicker = Backbone.View.extend({
 				 * '确认'按钮点击处理
 				 */
 				okBtnClick : function() {
-					$(this.el).val("");
-					this.dateformatter(this.yearTemp, this.monthTemp, this.dayTemp, 1);
-					var val1 = $(this.el).val();
-					if (this.options.timePicker) {
+					$(this.baseEl).val("");
+					
+					//日期格式转换，并在输入框中显示
+					this.dateformatter(this.yearTemp, this.monthTemp, this.dayTemp, true);
+					
+					var val1 = $(this.baseEl).val();
+					
+					if (this.options.showTimePicker) {
 						var val2 = $('#time_body-spinner-arrow').val();
-						$(this.el).val(val1 + " " + val2);
-					} else {
-						$(this.el).val(val1);
-					}
+						$(this.baseEl).val(val1 + " " + val2);
+					} 
+					
 					this.closeBtnClick();
 				},
 				
@@ -503,39 +524,59 @@ var	Lazy_DatePicker = Backbone.View.extend({
 				 * 左右选择键点击处理
 				 */
 				titleMove : function(event) {
+				
 					var event = event || window.event;
+					
 					var moveFlag = $(event.currentTarget).attr('class');
+					
 					var monthTemp = this.monthTemp, yearTemp = this.yearTemp;
+					
 					switch (moveFlag) {
-					case 'date_move_left':
-						monthTemp--;
-						if (monthTemp === 0) {
-							monthTemp = 12;
-							yearTemp--;
-						}
-						break;
-					case 'date_move_right':
-						monthTemp++;
-						if (monthTemp === 13) {
-							monthTemp = 1;
-							yearTemp++;
-						}
-						break;
-					default:
-						break;
+					
+						case 'date_move_left':
+							monthTemp--;
+							if (monthTemp === 0) {
+								monthTemp = 12;
+								yearTemp--;
+							}
+							break;
+							
+						case 'date_move_right':
+							monthTemp++;
+							if (monthTemp === 13) {
+								monthTemp = 1;
+								yearTemp++;
+							}
+							break;
+							
+						default:
+							break;
 					}
+					
 					this.yearTemp = yearTemp;
 					this.monthTemp = monthTemp;
 					this.dayTemp = 1;
-					this.formattedDateTemp = this.options.timePicker ? this.dateformatter(this.yearTemp, this.monthTemp,
+					
+					// 将新选择的日期进行格式转换
+					this.formattedDateTemp = this.options.showTimePicker ? this.dateformatter(this.yearTemp, this.monthTemp,
 							this.dayTemp, 0) : this.dateformatter(this.yearTemp, this.monthTemp, this.dayTemp, 1);
-					this.setCalendarContent(this.yearTemp, this.monthTemp, this.formattedDateTemp, this.options);
+					
+					// 重新设置表格盘显示内容及样式
+					this.setCalendarContent(this.yearTemp, this.monthTemp, this.formattedDateTemp);
+					
+					this.bindEvents();
+					
 					if (this.yearTemp !== this.year || this.monthTemp !== this.month) {
 						$('#date_table_content').find('td').removeClass('date_today');
 						$('#date_table_content').find('.calendar_item').eq(0).addClass('date_selected');
 					}
+					
 				},
 				
+				/**
+				 * 获取被选的年份
+				 * 为外调接口
+				 */
 				yearSelected : function() {
 					new monthSelectView(this.yearTemp, this.options);
 				},
@@ -546,8 +587,8 @@ var	Lazy_DatePicker = Backbone.View.extend({
 				cssPosition : function() {
 					
 					//根据输入框的位置和大小初始化日期控件的显示位置
-					var p_y = $(this.el).position().top + $(this.el).height();
-					var p_x = $(this.el).position().left;
+					var p_y = $(this.baseEl).position().top + $(this.baseEl).height();
+					var p_x = $(this.baseEl).position().left;
 					
 					//设置日期控件的显示位置
 					this.container.css({
@@ -558,19 +599,35 @@ var	Lazy_DatePicker = Backbone.View.extend({
 			});
 
 			
-			
+/**
+ * 月份选择试图对象定义
+ */ 
 var	monthSelectView = Backbone.View.extend({
+
 		el : $('body'),
+		
+		/**
+		 * 初始化方法
+		 */
 		initialize : function(year, options) {
-			this.el=options.baseEl;
+		
+			this.baseEl=options.baseEl;
 			this.datePickerOptions = options;
-			_.bindAll(this, 'render', 'monthBodyForm', 'titleMove', 'monthSelectedDeal');
+			
 			this.year = new Date().getFullYear();
 			this.month = new Date().getMonth() + 1;
 			this.yearTemp = year || new Date().getFullYear();
+			
+			//渲染
 			this.render(year);
+			
+			_.bindAll(this, 'render', 'monthBodyForm', 'titleMove', 'monthSelectedDeal');
+			
 		},
 		
+		/**
+		 * 渲染
+		 */
 		render : function(year) {
 			var $yearTitle = $('<span><span id="monthview_year">' + year+ '</span>年</span>');
 			
@@ -579,7 +636,11 @@ var	monthSelectView = Backbone.View.extend({
 			this.monthBodyForm(year);
 		},
 		
+		/**
+		 * 月份选择框内容渲染
+		 */
 		monthBodyForm : function(year) {
+			//创建月份选择框DOM对象
 			var $monthTable = $('<table id="date_month_body" class="date_month_body">' 
 							+ '<tr>' 
 								+ '<td>1月</td>' 
@@ -601,34 +662,44 @@ var	monthSelectView = Backbone.View.extend({
 							+ '</tr>' 
 						+ '</table>');
 			$('#date_body').empty().append($monthTable);
+			
+			//设置选择样式
 			if (year === this.year) {
 				$('#date_month_body').find('td').eq(this.month - 1).addClass('month_current').addClass('month_selected');
 			} else {
 				$('#date_month_body').find('td').eq(0).addClass('month_current').addClass('month_selected');
 			}
+			
+			//绑定月份点击处理逻辑
 			$('#date_month_body').find('td').unbind('click');
 			$('#date_month_body').find('td').bind('click', this.monthSelectedDeal);
 		},
 		
-		
+		/**
+		 * 年份左右选择键处理逻辑
+		 */
 		titleMove : function(event) {
 			event = event || window.event;
 			var moveFlag = $(event.currentTarget).attr('class');
 			var yearTemp = this.yearTemp;
 			switch (moveFlag) {
-			case 'date_move_left':
-				yearTemp--;
-				break;
-			case 'date_move_right':
-				yearTemp++;
-				break;
-			default:
-				break;
+				case 'date_move_left':
+					yearTemp--;
+					break;
+				case 'date_move_right':
+					yearTemp++;
+					break;
+				default:
+					break;
 			}
 			this.yearTemp = yearTemp;
 			$('#monthview_year').text(this.yearTemp);
 			this.monthBodyForm(this.yearTemp);
 		},
+		
+		/**
+		 * 选择某一具体月份时的处理逻辑
+		 */
 		monthSelectedDeal : function(event) {
 			event = event || window.event;
 			var strlength = $(event.currentTarget).text().length;
