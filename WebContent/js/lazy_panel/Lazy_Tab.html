@@ -12,18 +12,22 @@
 <body>
 <script type="text/javascript">
 window.onload = function() {
-	var tab = new Lazy_Tab({
+	/* var tab = new Lazy_Tab({
 		baseEl : '#demo',
 		titles : [ 'Title1', 'Title2', 'Title3','Tab4','Tab5' ]
-	}).render();
+	}).render(); */
+	var tab = $('#demo').Lazy_Tab([ 'Title1', 'Title2', 'Title3','Tab4','Tab5' ]);
+	//使用tab.method()调用Tab的方法
 };
 </script>
-<div id="demo">
+<div style="height:500px;">
+<div id="demo" >
 	<div>标签一</div>
 	<div>标签二</div>
 	<div>标签三</div>
 	<div>标签四</div>
 	<div>标签五</div>
+</div>
 </div>
 </body>
 </html>

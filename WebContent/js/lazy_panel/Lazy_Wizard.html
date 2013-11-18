@@ -14,15 +14,12 @@
 window.onload = function() {
 	var dialog = new Lazy_Wizard({
 		baseEl : "#demo_wizard",
-		title : "新建对话框",
-		width : 400,
-		height : 150,
-		closable : true
+		achievable:true,
+		cancelable:true,
+		okHasUp:false,
+		steps : [ "步骤一", "步骤二", "步骤三", "步骤四", "步骤五", "完成" ]
 	}).render();
 	
-	$('#openDialog').click(function() {
-		dialog.openDialog();
-	});
 };
 </script>
 <div id="demo_wizard">
@@ -33,6 +30,5 @@ window.onload = function() {
 	<div>步骤五</div>
 	<div>完成</div>
 </div>
-<a id="openDialog" href="javascript:void(0)">打开</a>
 </body>
 </html>
