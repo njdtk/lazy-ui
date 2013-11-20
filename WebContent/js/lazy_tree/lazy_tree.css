@@ -1,18 +1,16 @@
 /*--------------------------------------------------|
-| Lazy_Tree V2.0 | www.destroydrop.com/javascript/tree/ |
+| Lazy_Tree V2.0                                    |
 |---------------------------------------------------|
-| Copyright (c) 2002-2003 Geir Landr�               |
+| Copyright (c) 2013.11.14              |
 |--------------------------------------------------*/
 
+*{margin:0;padding:0;font-size:13px}
 
 .selected {
 	background-color: #FBEC88;
 }
 
-.node_mouseover {
-	text-decoration: underline;
-	color: #0033FF
-}
+
 
 .dtree_node {
 	height:24px
@@ -21,21 +19,72 @@
 .dtree_node span{
 	cursor:pointer
 }
-
+.dtree_node span:hover{
+	text-decoration: underline;
+	color: #0033FF
+}
 .new_node {
 	display:none
 }
 
+
+/*--------------------------------------------------|
+| Lazy_RightMenu V2.0                                    |
+|---------------------------------------------------|
+| Copyright (c) 2013.11.20               |
+|--------------------------------------------------*/
+
 .lazy_rightMenu {
-	width:150px;
+	width:170px;
 	position:absolute;
 	z-index: 1000;
+	padding-top:5px;
+	padding-bottom:5px;
 	background:#fff;
 	overflow:hidden;
 	border-radius:4px;
-	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.86)
+/*	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.86) */
+	box-shadow: 0 0 3px 0 #336699
 }
 
+.lazy_rightMenu .menu_item {
+	height:14px;
+	padding:4px;
+	position:relative;
+	line-height:12px;
+	cursor:pointer
+}
+
+.lazy_rightMenu .menu_item:hover{
+	background:#3399CC
+}
+
+.lazy_rightMenu .item_content{
+	
+	float:left;
+	margin-left:3%;
+	width:85%;
+	height:100%;
+	
+}
+
+.lazy_rightMenu .menu_split {
+	height:5px;
+	margin:2% 2% 0 2%;
+	position:relative;
+	border-style: solid none none none;
+	border-color:#cdcdcd;
+	border-width:1px
+	
+}
+
+.lazy_rightMenu .more_menus{
+	background:url('img/rightMenu_more.gif') no-repeat;
+	height:14px;
+	width:14px;
+	display:inline-block;
+	position:absolute;
+	right:3%}
 .li_right_rline{
 	margin-left:20px;
 	line-height:25px;

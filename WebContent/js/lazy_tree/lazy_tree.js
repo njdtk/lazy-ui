@@ -121,17 +121,17 @@ var Lazy_Tree = Backbone.View.extend({
 	 */
 	bindEvents : function() {
 		
-		// 聚焦样式处理
-		$(this.el).find(".dtree_node span").unbind("mouseover");
-		$(this.el).find(".dtree_node span").bind("mouseover", _(function(e) {
-			this._addStyle(e);
-		}).bind(this));
-		
-		// 失去焦点样式处理
-		$(this.el).find(".dtree_node span").unbind("mouseout");
-		$(this.el).find(".dtree_node span").bind("mouseout", _(function(e) {
-			this._removeStyle(e);
-		}).bind(this));
+		// // 聚焦样式处理
+		// $(this.el).find(".dtree_node span").unbind("mouseover");
+		// $(this.el).find(".dtree_node span").bind("mouseover", _(function(e) {
+		// this._addStyle(e);
+		// }).bind(this));
+		//		
+		// // 失去焦点样式处理
+		// $(this.el).find(".dtree_node span").unbind("mouseout");
+		// $(this.el).find(".dtree_node span").bind("mouseout", _(function(e) {
+		// this._removeStyle(e);
+		// }).bind(this));
 		
 		// 节点点击事件处理
 		$(this.el).find(".dtree_node span").unbind("click");
@@ -178,22 +178,22 @@ var Lazy_Tree = Backbone.View.extend({
 	/**
 	 * 添加mouseover样式
 	 */
-	_addStyle : function(e) {
-		$(e.currentTarget).addClass("node_mouseover");
-		// $(e.currentTarget)[0].style.setProperty("text-decoration","underline");
-		// $(e.currentTarget)[0].style.setProperty("color","#0033FF");
-	},
-	
-	/**
-	 * 添加mouseout样式
-	 */
-	_removeStyle : function(e) {
-		$(e.currentTarget).removeClass("node_mouseover");
-		// console.log($(e.currentTarget)[0])
-		// $(e.currentTarget)[0].style.setProperty("text-decoration","");
-		// $(e.currentTarget)[0].style.setProperty("color","");
-	},
-	
+	// _addStyle : function(e) {
+	// $(e.currentTarget).addClass("node_mouseover");
+	// //
+	// $(e.currentTarget)[0].style.setProperty("text-decoration","underline");
+	// // $(e.currentTarget)[0].style.setProperty("color","#0033FF");
+	// },
+	//	
+	// /**
+	// * 添加mouseout样式
+	// */
+	// _removeStyle : function(e) {
+	// $(e.currentTarget).removeClass("node_mouseover");
+	// // console.log($(e.currentTarget)[0])
+	// // $(e.currentTarget)[0].style.setProperty("text-decoration","");
+	// // $(e.currentTarget)[0].style.setProperty("color","");
+	// },
 	/**
 	 * 凸显选中行样式
 	 */
