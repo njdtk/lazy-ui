@@ -11,7 +11,19 @@
 
 .node_mouseover {
 	text-decoration: underline;
-	color: #0033FF;
+	color: #0033FF
+}
+
+.dtree_node {
+	height:24px
+}
+
+.dtree_node span{
+	cursor:pointer
+}
+
+.new_node {
+	display:none
 }
 
 .lazy_rightMenu {
@@ -21,18 +33,18 @@
 	background:#fff;
 	overflow:hidden;
 	border-radius:4px;
-	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.86);
+	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.86)
 }
 
 .li_right_rline{
 	margin-left:20px;
 	line-height:25px;
-	cursor:pointer;
+	cursor:pointer
 	
 }
 
 .li_right_nline{
 	margin-left:15px;
-	line-height:10px;
+	line-height:10px
 	
 }
