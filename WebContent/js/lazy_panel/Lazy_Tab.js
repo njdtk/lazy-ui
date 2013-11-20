@@ -26,6 +26,11 @@
 
 		/* ---------- Private Methods ---------------- */
 
+		/**
+		 * TODO 2013-11-19
+		 * 
+		 * @returns {___anonymous162_2951}
+		 */
 		render : function() {
 			return this;
 		},
@@ -34,7 +39,7 @@
 
 			$(this.el).addClass('cs2c_tab');
 
-			// 在用户创建对话框内容位置创建对话框
+			// TODO 在用户创建对话框内容位置创建对话框
 			$(this.options.baseEl).parent().append(this.el);
 
 			// 创建控件内容
