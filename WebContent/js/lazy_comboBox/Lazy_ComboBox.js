@@ -118,6 +118,7 @@ $(function() {
 				
 				/** 通过数据绘制下拉列表 2013-11-14 */
 				createListByData : function() {
+					
 					var listData = "", listTempArray = [];
 					if (this.options.listData) {
 						listData = this.comboListDomData ? this.comboListDomData : this.options.listData;
@@ -138,7 +139,7 @@ $(function() {
 					// style="text-align:center">-- 请选择 --</div>');
 					// }
 					
-					this.comboListDom.find('.item_list').append(listTempArray.join(''));
+					this.comboListDom.find('.item_list').empty().append(listTempArray.join(''));
 					
 					if (listData && listData.list.length > 0) {
 						if (this.comboPager <= listData.count / 5 && this.options.more) {
@@ -343,6 +344,7 @@ $(function() {
 				
 				/** 【更多】的处理函数 2013-11-14 */
 				moreAction : function() {
+					
 					this.comboPager++;
 					this.dataAjax();
 					this.createListByData();
