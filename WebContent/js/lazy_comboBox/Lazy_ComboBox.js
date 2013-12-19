@@ -2,6 +2,7 @@
  * Lazy_ComboBox.js
  * Start by @author Xiran.Liu on Date:2013-6-1
  * Update by @author QQ.Y on Data:2013-11-14
+ * Update by @author xiran.liu for teston Data:2013-12-19
  */
 $(function() {
 	Lazy_ComboBox = Backbone.View
