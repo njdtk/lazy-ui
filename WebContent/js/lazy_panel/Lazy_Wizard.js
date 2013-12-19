@@ -70,7 +70,7 @@ Lazy_Wizard = Backbone.View
 				"click .cs2c_dialog_button a" : "_buttonAction"
 			},
 			
-			/* 创建向导进度步骤条 2013-11-11 */
+			/** 创建向导进度步骤条 2013-11-11 */
 			_createWizardBanner : function() {
 				
 				var bannerStepString = '';
@@ -86,14 +86,14 @@ Lazy_Wizard = Backbone.View
 				
 			},
 			
-			/* 创建向导面板的内容 2013-11-11 */
+			/** 创建向导面板的内容 2013-11-11 */
 			_createWizardCtx : function() {
 				$(this.el).append('<div class="cs2c_wizard_dialog_ctx"></div>');
 				$(this.el).find('.cs2c_wizard_dialog_ctx').append($(this.options.baseEl));
 				$(this.el).find('.cs2c_wizard_dialog_ctx').height(this.options.height);
 			},
 			
-			/* 创建向导面板的button区域 2013-11-11 */
+			/** 创建向导面板的button区域 2013-11-11 */
 			_createWizardButton : function() {
 				$(this.el).append('<div class="cs2c_dialog_button"></div>');
 				
@@ -123,7 +123,11 @@ Lazy_Wizard = Backbone.View
 				this.options.cancelable ? dialog_btn.find('.cancel').show() : dialog_btn.find('.cancel').hide();
 			},
 			
-			/* 控制向导面板的界面显示 2013-11-11 @param pageNum：从1开始 */
+			/**
+			 * 控制向导面板的界面显示 2013-11-11
+			 * 
+			 * @param pageNum：从1开始
+			 */
 			_componentDisplayController : function(pageNum) {
 				
 				var dialog_btn = $(this.el).find('.cs2c_dialog_button');
@@ -173,7 +177,11 @@ Lazy_Wizard = Backbone.View
 				this.enterWizard(pageNum - 1);// 从0开始索引
 			},
 			
-			/* 上下步、完成等的按钮的执行动作 2013-11-11 @param e：鼠标点击事件 */
+			/**
+			 * 上下步、完成等的按钮的执行动作 2013-11-11
+			 * 
+			 * @param e：鼠标点击事件
+			 */
 			_buttonAction : function(e) {
 				
 				var btnClass = e.currentTarget.className.split(" ")[1];
@@ -206,33 +214,52 @@ Lazy_Wizard = Backbone.View
 			
 			/* ------ Public Methods -------------- */
 
-			/* 上一步按钮执行动作 2013-11-11 @param pageNum： 从0开始索引 */
+			/**
+			 * 上一步按钮执行动作 2013-11-11
+			 * 
+			 * @param pageNum： 从0开始索引
+			 */
 			prevPressed : function(pageNum) {
 			},
 			
-			/*
-			 * 下一步按钮执行动作 2013-11-11 @returns {Boolean} @param pageNum
+			/**
+			 * 下一步按钮执行动作 2013-11-11
+			 * 
+			 * @returns {Boolean}
+			 * @param pageNum
 			 */
 			nextPressed : function(pageNum) {
 				return true;
 			},
 			
-			/* 完成按钮执行操作 2013-11-11 @param pageNum */
+			/**
+			 * 完成按钮执行操作 2013-11-11
+			 * 
+			 * @param pageNum
+			 */
 			okPressed : function(pageNum) {
 			},
 			
-			/* 取消按钮执行操作 2013-11-11 */
+			/** 取消按钮执行操作 2013-11-11 */
 			cancelPressed : function() {
 			},
 			
-			/* 显示向导需要显示第几步 2013-11-11 @param index：从0开始索引 */
+			/**
+			 * 显示向导需要显示第几步 2013-11-11
+			 * 
+			 * @param index：从0开始索引
+			 */
 			showWizardStep : function(index) {
 				
 				this._pageNum = index + 1;
 				this._componentDisplayController(index + 1);
 			},
 			
-			/* 隐藏向导的部分步骤（包括进度指示条以及内容） 2013-11-11 @param index：从0开始检索 */
+			/**
+			 * 隐藏向导的部分步骤（包括进度指示条以及内容） 2013-11-11
+			 * 
+			 * @param index：从0开始检索
+			 */
 			hideWizardStep : function(index) {
 				
 				// 1、控制步骤进度条的显示
@@ -242,8 +269,7 @@ Lazy_Wizard = Backbone.View
 				$(this.options.baseEl).children().eq(index).hide();
 			},
 			
-			/* 进入当前页显示的时候需要执行的动作 2013-11-11 @param pageNum */
-			enterWizard : function(pageNum) {
+			enerWizard : function(pageNum) {
 				
 			}
 		

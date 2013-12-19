@@ -118,19 +118,19 @@
 		  showCheckbox:true,
 		  //objName:"dtree1",
 		  list:[
-					{ "content":"neoadm_r", "id":"1", "pid":"-1", "model":{"name":"neoadm_r", "type":"admin"}},
-					{ "content":"sysadm_r", "id":"11", "pid":"1", "model":{"name":"sysadm_r", "type":"admin"}},
-					{ "content":"secadm_r", "id":"12", "pid":"1", "model":{"name":"secadm_r", "type":"admin"}},
-					{ "content":"auditadm_r", "id":"13", "pid":"1", "model":{"name":"auditadm_r", "type":"admin"}},
-					{ "content":"guest_r", "id":"14", "pid":"1", "model":{"name":"guest_r", "type":"admin"}},
-					{ "content":"sys1_r", "id":"111", "pid":"11", "model":{"name":"sys1_r", "type":"other"}},
-					{ "content":"sys2_r", "id":"112", "pid":"11", "model":{"name":"sys2_r", "type":"other"}},
-					{ "content":"guest1_r", "id":"141", "pid":"14", "model":{"name":"guest1_r", "type":"other"}},
-					{ "content":"guest2_r", "id":"142", "pid":"14", "model":{"name":"guest2_r", "type":"other"}},
-					{ "content":"guest3_r", "id":"143", "pid":"14", "model":{"name":"guest3_r", "type":"other"}},
-					{ "content":"guest2_sub1_r", "id":"1421", "pid":"142", "model":{"name":"guest2_sub1_r", "type":"other"}},
-					{ "content":"guest2_sub2_r", "id":"1422", "pid":"142", "model":{"name":"guest2_sub2_r", "type":"other"}},
-					{ "content":"guest3_sub1_r", "id":"1431", "pid":"143", "model":{"name":"guest3_sub1_r", "type":"other"}}
+					{ "content":"超级管理组", "id":"1", "pid":"-1", "model":{"name":"超级管理组", "type":"admin"}},
+					{ "content":"系统管理组", "id":"11", "pid":"1", "model":{"name":"系统管理组", "type":"admin"}},
+					{ "content":"安全管理组", "id":"12", "pid":"1", "model":{"name":"安全管理组", "type":"admin"}},
+					{ "content":"审计管理组", "id":"13", "pid":"1", "model":{"name":"审计管理组", "type":"admin"}},
+					{ "content":"普通用户组", "id":"14", "pid":"1", "model":{"name":"普通用户组", "type":"admin"}},
+					{ "content":"系统用户子组1", "id":"111", "pid":"11", "model":{"name":"系统用户子组1", "type":"other"}},
+					{ "content":"系统用户子组2", "id":"112", "pid":"11", "model":{"name":"系统用户子组2", "type":"other"}},
+					{ "content":"普通用户子组1", "id":"141", "pid":"14", "model":{"name":"普通用户子组1", "type":"other"}},
+					{ "content":"普通用户子组2", "id":"142", "pid":"14", "model":{"name":"普通用户子组2", "type":"other"}},
+					{ "content":"普通用户子组3", "id":"143", "pid":"14", "model":{"name":"普通用户子组3", "type":"other"}},
+					{ "content":"普通用户1", "id":"1421", "pid":"142", "model":{"name":"普通用户1", "type":"other"}},
+					{ "content":"普通用户2", "id":"1422", "pid":"142", "model":{"name":"普通用户2", "type":"other"}},
+					{ "content":"普通用户3", "id":"1431", "pid":"143", "model":{"name":"普通用户3", "type":"other"}}
 					//{ "content":"guest2_sub1_sub1_r", "id":"14228", "pid":"1421", "model":{"name":"guest2_sub1_sub1_r", "type":"other"}}
 				],
 				
@@ -150,13 +150,17 @@
 		  
 		    list:[
 					[
-						{"optName":"操作1", "optParam":"j1"},
-						{"optName":"操作2","optParam":"2"},
-						{"optName":"操作3","optParam":"3"}
+						{"optName":"修改备注名称", "optParam":"j1"},
+						{"optName":"举报此用户","optParam":"2"},
+						{"optName":"发送电子邮件","optParam":"3"}
 					],
 					[
-						{"optName":"操作4","optParam":"4"},
-						{"optName":"操作5","optParam":"5"}
+						{"optName":"会员快捷功能","optParam":"4","children":[
+							{"optName":"设置好友铃音","optParam":"41"},
+							{"optName":"设置QQ装扮","optParam":"42"},
+							{"optName":"好友上线通知","optParam":"43"}
+						]},
+						{"optName":"进入QQ空间","optParam":"5"}
 					]
 				
 				],

@@ -24,7 +24,11 @@ var Selection = {
         	return this.isStandard()||( oo = document.selection) && !!oo.createRange();
         },
         
-        /* 设置光标位置 2013-11-15 @param start,end 光标的开始、结束位置 */
+        /**
+		 * 设置光标位置 2013-11-15
+		 * 
+		 * @param start,end 光标的开始、结束位置
+		 */
         setCaret : function(start, end){
             var o = this.input;
             if(this.isStandard){
@@ -37,7 +41,11 @@ var Selection = {
             }
         },
         
-        /* 获取光标位置 2013-11-15 @returns 光标的开始、结束位置 */
+        /**
+		 * 获取光标位置 2013-11-15
+		 * 
+		 * @returns 光标的开始、结束位置
+		 */
         getCaret: function(){
         	var o = this.input, d = document;
         	if(this.isStandard) {
@@ -130,7 +138,7 @@ var Lazy_TimePicker = Backbone.View.extend({
 
 	},
 	
-	/* 创建事件选择器的DOM结构 2013-11-15 */
+	/** 创建事件选择器的DOM结构 2013-11-15 */
 	setDom : function() {
 		
 		var ele = '<input readonly="readonly" class="spinner-text" value=""/>';
@@ -140,7 +148,7 @@ var Lazy_TimePicker = Backbone.View.extend({
 		$(this.el).append(ele);
 	},
 	
-	/* 根据不同的条件设置时间选择器显示的时间值 2013-11-15 */
+	/** 根据不同的条件设置时间选择器显示的时间值 2013-11-15 */
 	setValue : function() {
 		
 		var val = "";
@@ -166,7 +174,12 @@ var Lazy_TimePicker = Backbone.View.extend({
 		}
 	},
 
-	/* 时间格式化 2013-11-15 @param value:时间的值,type:时间的类型选择类型号 @returns 显示的时间值 */
+	/**
+	 * 时间格式化 2013-11-15
+	 * 
+	 * @param value:时间的值,type:时间的类型选择类型号
+	 * @returns 显示的时间值
+	 */
 	formatTime : function(value, type) {
 		if (type === 0 && value > 23) {
 			value = 0;
@@ -183,13 +196,18 @@ var Lazy_TimePicker = Backbone.View.extend({
 		return (value < 10 ? "0" + value : value);
 	},
 	
-	/* 解析时间字符串 2013-11-15 @param time:时间字符串 @returns 返回时间秒数 */
+	/**
+	 * 解析时间字符串 2013-11-15
+	 * 
+	 * @param time:时间字符串
+	 * @returns 返回时间秒数
+	 */
 	parseTime : function(time) {
 		var arr = time.split(":");
 		return parseInt(arr[0] * 3600) + parseInt(arr[1]) * 60 + parseInt(arr[2]);
 	},
 	
-	/* 获取当前时间 2013-11-15 */
+	/** 获取当前时间 2013-11-15 */
 	getThisTime : function() {
 		var thisDay = new Date();
 		this.hour = thisDay.getHours();// 获取当前小时数(0-23)
@@ -198,7 +216,7 @@ var Lazy_TimePicker = Backbone.View.extend({
 		return this.formatTime(this.hour) + ":" + this.formatTime(this.minute) + ":" + this.formatTime(this.second);
 	},
 	
-	/* 向上箭头执行操作：增加时间 2013-11-15 */
+	/** 向上箭头执行操作：增加时间 2013-11-15 */
 	addTime : function() {
 		
 		// 选中要修改时间的控件【选中位置】
@@ -231,7 +249,7 @@ var Lazy_TimePicker = Backbone.View.extend({
 		this.text.focus();
 	},
 	
-	/* 向下箭头执行操作：减少时间 2013-11-15 */
+	/** 向下箭头执行操作：减少时间 2013-11-15 */
 	reduceTime : function() {
 		
 		// 选中要修改时间的控件【选中位置】
@@ -264,7 +282,12 @@ var Lazy_TimePicker = Backbone.View.extend({
 		this.text.focus();
 	},
 	
-	/* 格式化位置的号码 2013-11-15 @param poz @returns */
+	/**
+	 * 格式化位置的号码 2013-11-15
+	 * 
+	 * @param poz
+	 * @returns
+	 */
 	formatPoz : function(poz) {
 		if (poz < 3) {
 			poz = 1;
