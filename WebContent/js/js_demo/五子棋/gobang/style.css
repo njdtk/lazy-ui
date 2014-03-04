@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background-color: #ccc;
+	font-size: 0.9em;
+	line-height: 1.5em;
+}
+
+.bar {
+	position: absolute;
+	top: 40px;
+	right: 15%;
+	width: 150px;
+    text-align: left;
+}
+
+.notice {
+	margin-top: 15px;
+	margin-bottom: 30px;
+	border: 1px solid #333;
+}
+
+.notice p {
+	width: inherit;
+	margin: 0px;
+	padding: 10px;
+}
+
+.now {
+	background-color: #AAE
+}
+
+#map {
+}
+
+#piece {
+    height: 600px;
+    width: 600px;
+	position: absolute;
+	display:block;
+	z-index: 2;
+}
+
+body #container {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: auto;
+	padding-top: 50px;
+}

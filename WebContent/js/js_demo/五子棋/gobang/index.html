@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+
+        <script language="javascript" type="text/javascript"> 
+            var grid = 40; 
+            var num = 15; 
+        </script>
+
+        <script type="text/javascript" charset="utf-8" src="Maple.js/lib/bison.js"></script>
+        <script type="text/javascript" charset="utf-8" src="Maple.js/lib/Class.js"></script>
+        <script type="text/javascript" charset="utf-8" src="Maple.js/lib/Twist.js"></script>
+        <script type="text/javascript" charset="utf-8" src="Maple.js/Maple.js"></script>
+        <script type="text/javascript" charset="utf-8" src="Maple.js/Client.js"></script>
+
+
+        <title>在线五子棋,Powered by Maple.js</title>
+    </head>
+    <body>
+        <div id='container'>
+        <script src="client.js" type="text/javascript"></script>
+        <canvas id="map">    
+        This browser does not support HTML5..              
+        </canvas>  
+        <div class="bar">
+            <div class="notice">
+                <p id="myName"></p>
+                <p class="status_bar">等待网友加入..</p>
+            </div>
+            <p><input type="button" id="start" onclick="start()" value="start"></p>
+
+            <div id="players"> </div>
+            <div id="watchers"> </div>
+            <p></p>
+            <p></p>
+            <p></p>
+            <div>for develops: <a href=/dev>guide</a> </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+p{color:blue;font:normal bold 19px;}
+</style>
+<body>
+<p>var A = function(){};<em>//等价于var A = new Function();因此，该表达式的构造函数当然是Function()</em></p>
+<script type="text/javascript">
+var A = function(){};
+document.write("【A.constructor】="+A.constructor+"<br>");
+</script>
+
+
+<p>A.prototype = {};</p>
+<script type="text/javascript">
+document.write("【A.constructor】="+A.constructor+"<br>");
+</script>
+
+
+<p>var B = {};<em>//等价于var B = new Object();因此，该表达式的构造函数当然是Object()</em></p>
+<script type="text/javascript">
+var B = {};
+document.write("【B.constructor】="+B.constructor+"<br>");
+</script>
+
+
+<p>var a = new A();</p>
+<p>var b = new A();</p>
+<script type="text/javascript">
+var a = new A();
+var b = new A();
+document.write("【a.constructor】="+a.constructor+"<br>");
+document.write("【b.constructor】="+b.constructor+"<br>");
+</script>
+
+
+<p>b.contructor = A.contructor;</p>
+<script type="text/javascript">
+b.contructor = A.contructor;
+document.write("【a.constructor==A】="+(a.constructor==A)+"<br>");
+document.write("【b instanceof a.constructor】="+(b instanceof a.constructor)+"<br>");
+document.write("【b.contructor==a.contructor】="+(b.contructor==a.contructor)+"<br>");
+</script>
+
+<script type="text/javascript">
+function createFunction(){
+  var result = new Array();
+  for(var i = 0; i<10; i++ ){
+    result[i] = function(){
+      return i;
+    };   
+  }
+  return result;
+}
+
+
+function outputNumbers(count){
+  for(var i = 0;i<count;i++){
+    alert("in for:"+i);
+  }
+  var i;
+  alert("out for:"+i);
+}
+
+outputNumbers(5);
+</script>
+</body>
+</html>

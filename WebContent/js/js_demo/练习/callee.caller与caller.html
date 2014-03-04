@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<script type="text/javascript">
+function outer(){
+  inner();
+}
+function inner(){
+  document.write(arguments.callee.caller);//等同于inner.caller,其指向outer(),因为outer调用了inner
+}
+outer();
+</script>
+</body>
+</html>

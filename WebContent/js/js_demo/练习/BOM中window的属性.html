@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<p>window的属性列表：</p>
+<div id="div1">
+  <a>A</a>
+  B
+  <p>CCC</p>
+</div>
+<script type="text/javascript">
+for (var proName in window){
+  document.write(proName+"<br>");
+}
+document.write("<hr><br>");
+for (var nodePr in Node){
+  document.write(nodePr+"<br>");
+}
+document.write("<hr><br>");
+var divEle = document.getElementById('div1');
+var childnodeslist = divEle.childNodes;
+(function(){
+  for(var i=0;i<childnodeslist.length;i++){
+    document.write("nodeName:"+childnodeslist[i].nodeName+"; textContent:"+childnodeslist[i].textContent+"; nodeType:"+childnodeslist[i].nodeType+"<br>");
+  }
+})();
+document.write("lastChild:"+divEle.lastChild+"<br>");
+</script>
+</body>
+</html>

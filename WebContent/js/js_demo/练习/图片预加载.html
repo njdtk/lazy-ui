@@ -1,0 +1,133 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html;" charset=utf-8" /> 
+<title>img ready</title> 
+<script> 
+var imgReady = function (url, callback, error) {
+	var width, height, intervalId, check, div,
+		img = new Image(),
+		body = document.body;
+		
+	img.src = url;
+	
+	// 从缓存中读取
+	if (img.complete) {
+		return callback(img.width, img.height);
+	};
+	
+	// 通过占位提前获取图片头部数据
+	if (body) {
+		div = document.createElement('div');
+		div.style.cssText = 'visibility:hidden;position:absolute;left:0;top:0;width:1px;height:1px;overflow:hidden';
+		div.appendChild(img)
+		body.appendChild(div);
+		width = img.offsetWidth;
+		height = img.offsetHeight;
+		
+		check = function () {
+			if (img.offsetWidth !== width || img.offsetHeight !== height) {
+				clearInterval(intervalId);
+				callback(img.offsetWidth, img.clientHeight);
+				img.onload = null;
+				div.innerHTML = '';
+				div.parentNode.removeChild(div);
+			};
+		};
+		
+		intervalId = setInterval(check, 150);
+	};
+	
+	// 加载完毕后方式获取
+	img.onload = function () {
+		callback(img.width, img.height);
+		img.onload = img.onerror = null;
+		clearInterval(intervalId);
+		body && img.parentNode.removeChild(img);
+	};
+	
+	// 图片加载错误
+	img.onerror = function () {
+		error && error();
+		clearInterval(intervalId);
+		body && img.parentNode.removeChild(img);
+	};
+	
+};
+</script> 
+ 
+<script> 
+/* demo script */
+window.onload = function () {
+var imgUrl = 'http://www.planeart.cn/demo/imgReady/vistas24.jpg?',
+	testReadyBtn = document.getElementById('testReadyBtn'),
+	clsCacheBtn = document.getElementById('clsCacheBtn'),
+	status = document.getElementById('status'),
+	statusReady = document.getElementById('statusReady'),
+	statusLoad = document.getElementById('statusLoad'),
+	imgWrap = document.getElementById('imgWrap');
+	
+var imgLoad = function (url, callback) {
+	var img = new Image();
+ 
+	img.src = url;
+	if (img.complete) {
+		callback(img.width, img.height);
+	} else {
+		img.onload = function () {
+			callback(img.width, img.height);
+			img.onload = null;
+		};
+	};
+ 
+};
+ 
+testReadyBtn.onclick = function () {
+	var that = this;
+ 
+	that.disabled = true;
+	status.style.display = 'block';
+	statusLoad.innerHTML = statusReady.innerHTML = 'Loading...';
+	imgWrap.innerHTML = '<img src="' + imgUrl + '" />';
+	
+	// 使用占位方式快速获取大小
+	imgReady(imgUrl, function (width, height) {
+		statusReady.innerHTML = 'width:' + width + '; height:' + height;
+	}, function () {
+		statusReady.innerHTML = 'Img Error!';
+	});
+	
+	// 使用传统方式获取大小
+	imgLoad(imgUrl, function (width, height) {
+		statusLoad.innerHTML = 'width:' + width + '; height:' + height;
+		that.disabled = false;
+	}, function () {
+		statusLoad.innerHTML = 'Img Error!';
+		that.disabled = false;
+	});
+	
+};
+ 
+clsCacheBtn.onclick = function () {
+	imgUrl += new Date().getTime();
+	status.style.display = 'none';
+	imgWrap.innerHTML = '';
+};
+ 
+};
+</script> 
+</head> 
+ 
+<body> 
+
+<p><button id="testReadyBtn">Click to Load Img</button> <button id="clsCacheBtn">Clear Cache</button>(after loaded img,brower saved the img to cache)</p> 
+<div id="status" style="display:none"> 
+	<p><strong>imgReady:</strong><p> 
+	<p id="statusReady"></p> 
+	<p><strong>imgLoad:</strong></p> 
+	<p id="statusLoad"><p> 
+</div> 
+<div id="imgWrap"></div> 
+<div style="display:none"><script src="http://s86.cnzz.com/stat.php?id=1581115&web_id=1581115" charset="gb2312"></script></div> 
+</body> 
+</html> 

@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+p{color:blue;font:normal bold 19px;}
+</style>
+<body>
+<script type="text/javascript">
+document.write("<br>");
+document.write("【typeof NaN】= "+(typeof(NaN))+ "</br>");
+document.write("【typeof Infinity】= "+(typeof Infinity)+ "//正无穷类型 </br>");
+document.write("【typeof null】= "+(typeof null)+ "</br>");
+document.write("【typeof undefined】= "+(typeof undefined)+ "</br>");
+document.write("<br>");
+document.write("【NaN == NaN】= "+(NaN == NaN)+ "</br>");
+document.write("【NaN != NaN】= "+(NaN != NaN)+ "</br>");
+document.write("【NaN >= NaN】= "+(NaN >= NaN)+ "</br>");
+document.write("<br>");
+document.write("【null == undefined】= "+(null == undefined)+ "</br>");
+document.write("【null >= undefined】= "+(null >= undefined)+ "</br>");
+document.write("【null <= undefined】= "+(null <= undefined)+ "</br>");
+document.write("<br>");
+document.write("【parseInt('123abc')】= "+(parseInt("123abc"))+ "</br>");
+document.write("【'123abc' - 0】= "+("123abc" - 0)+ "</br>");
+document.write("<br>");
+document.write("【Infinity > 10】= "+(Infinity > 10)+ "</br>");
+document.write("【Infinity > 'abc'】= "+(Infinity > "abc")+ "</br>");
+document.write("【Infinity == NaN】= "+(Infinity == NaN)+ "</br>");
+document.write("<br>");
+document.write("【true == 1】= "+(true == 1)+ "</br>");
+document.write("<br>");
+document.write("【new String('abc') == 'abc'】= "+(new String("abc") == "abc")+ "</br>");
+document.write("【new String('abc') === 'abc'】= "+(new String("abc") === "abc")+ "</br>");
+document.write("【'a'>'b'】= "+('a'>'b')+ "</br>");
+document.write("【'a'<'b'】= "+('a'<'b')+ "</br>");
+document.write("<br>");
+document.write("【typeof Function.prototype】= "+(typeof Function.prototype)+ "</br>");
+document.write("【typeof Object.prototype】= "+(typeof Object.prototype)+ "</br>");
+document.write("【typeof Function】= "+(typeof Function)+ "</br>");
+document.write("【Object.prototype instanceof Function】= "+(Object.prototype instanceof Function)+ "</br>");
+document.write("【Function.prototype instanceof Function】= "+(Function.prototype instanceof Function)+ "</br>");
+document.write("<hr><br>");
+document.write("alert(null instanceof Object);//"+(null instanceof Object)+ "</br>");
+
+document.write("<br>");
+document.write("alert(['1', '2', '3].map(parseInt));//"+(["1", "2", "3"].map(parseInt))+ "</br>");
+var val = 'smtg';
+document.write("var val = 'smtg'; console.log('Value is ' + (val === 'smtg') ? 'Something' : 'Nothing');//"+('Value is ' + (val === 'smtg') ? 'Something' : 'Nothing')+ "</br>");
+document.write("<br>");
+document.write("alert(Boolean('Value is '+ true));//"+Boolean('Value is '+ true)+ "</br>");
+document.write("<br>");
+document.write("alert(Array.isArray(Array.prototype)));//"+Array.isArray(Array.prototype)+ "</br>");
+document.write("<br>");
+document.write("alert('5'-3);//"+('5'-3)+ "</br>");
+document.write("<br>");
+document.write("alert(1 + - + + + - + 1);//"+(1 + - + + + - + 1)+ "</br>");
+
+
+function test01(){
+var foo = 1;
+function bar() {
+	foo = 10;
+	return;
+	function foo() {}
+}
+bar();
+alert(foo);
+}
+function test02(){
+function bar() {
+    return foo;
+    foo = 10;
+    function foo() {}
+    var foo = 11;
+}
+alert(typeof bar());
+}
+
+
+
+function test(){
+  var a = new Object();
+  a.toString = function(){return "123abc";}
+  a.valueOf = function(){return parseInt(a);}
+  document.write("【a】= "+a+ "</br>");
+  document.write("【a-0】= "+(a-0)+ "</br>");
+}
+function test1(){
+  String.prototype.valueOf = function(){
+  return parseFloat(this);
+  }
+  document.write("【'123abc' > 122】= "+("123abc" > 122)+ "//基本数据类型只会调用toString方法【不会】调用valueof方法 </br>");
+  document.write("【new String('123abc')】= "+(new String("123abc"))+ "//引用类型调用valueof方法 <br>");
+}
+function test2(){
+  var s = new String("abc");
+  alert(typeof(s) == typeof("abc"));
+  alert(s === "abc");
+  alert(s.toString() == s);
+}
+function test3(){
+  var a = new Object();
+  a.toString = function(){return "a"};
+  var b = new Object();
+  b.toString = function(){return "b"};
+  alert(a>b);
+  a.valueOf = function(){return 1};
+  b.valueOf = function(){return 0};
+  alert(a>b);
+}
+function test4(){
+  function step(a){
+    return function(x){
+      return x+a ;
+    }
+  }
+  var a = step(10);
+  var b = step(20);
+  document.write("【a(10)】= "+a(10)+ "</br>");
+  document.write("【b(10)】= "+b(10)+ "</br>"); 
+}
+function test5(){
+  var i=5;
+  function fo(){
+    var i=4;
+    var fi=new Function("alert(i);");
+    fi();
+  }
+  fo();
+}
+function test6(){
+  function f1(){
+    i=20;
+    eval("var i");//将全局变量转化为局部变量
+  }
+  alert(i);//程序出错i未定义
+  function f1(){
+    i=10;
+    var i;
+  }
+  alert(i);//程序出错i未定义
+}
+
+function test7(){
+  function f1(){
+    alert("1");
+  }
+  function f2(){
+    alert("2");
+  }
+  var f3=f1.call;
+  f3.call(f2);
+}
+function test8(){
+  function f1(n){
+    if(n==0)return;
+    else return f2(--n);
+  }
+  function f2(n){
+    alert(f1.caller);
+    return f1(n);
+  }
+  f1(2);
+}
+//test9=============================================================================================
+function test9(){
+  function cls1(){
+    this.a=new Array;
+  }
+  function cls2(){ 
+  }
+  cls2.prototype=new cls1;
+  var x=new cls2;
+  var y=new cls2;
+  x.a.push(1,2,3);
+  alert(y.a);
+}
+//test10=============================================================================================
+function test10(){
+  function cls1(){
+    this.a=1;
+  }
+  function cls2(){ 
+  }
+  var x=new cls2;
+  cls2.prototype=new cls1;
+  var y=new cls2;
+  alert(x.a);
+  alert(y.a);
+}
+
+function test11(){
+  function cls1(){
+    this.a=1;
+  }
+  function cls2(){
+  }
+  var x=new cls2;
+  cls2.prototype.a=1;
+  var y=new cls2;
+  alert(x.a);
+  alert(y.a);
+}
+
+function test13(){
+  String.prototype.self=function(){
+    return this;
+  }
+  var s="s";
+  alert("s".self()=="s")
+  alert(s.self()==s)
+  alert("s"==="s")
+  alert("s".self()=="s".self())
+  alert(s.self()==s.self())
+}
+function test14(){
+  var a = 1;
+  function b(){
+    alert(a);
+    eval("var a=2");
+    alert(a);
+    //eval("var a");
+    //alert(a);
+  }
+  b();
+}
+test14();
+</script>
+<p>题1=============================================================================================================================</p>
+<p>var A = function(){};</p>
+<script type="text/javascript">
+var A = function(){};
+document.write("alert(A.constructor);//"+A.constructor+"<br>");
+</script>
+
+
+<p>A.prototype = {};</p>
+<script type="text/javascript">
+document.write("alert(A.constructor);//"+A.constructor+"<br>");
+</script>
+
+
+<p>var B = {};</p>
+<script type="text/javascript">
+var B = {};
+document.write("alert(B.constructor);//"+B.constructor+"<br>");
+</script>
+
+
+<p>var a = new A();</p>
+<p>var b = new A();</p>
+<script type="text/javascript">
+var a = new A();
+var b = new A();
+document.write("alert(a.constructor);//"+a.constructor+"<br>");
+document.write("alert(b.constructor);//"+b.constructor+"<br>");
+</script>
+
+
+<p>b.contructor = A.contructor;</p>
+<script type="text/javascript">
+b.contructor = A.contructor;
+document.write("alert(a.constructor==A);//"+(a.constructor==A)+"<br>");
+document.write("alert(b instanceof a.constructor);//"+(b instanceof a.constructor)+"<br>");
+document.write("alert(b.contructor==a.contructor);//"+(b.contructor==a.contructor)+"<br>");
+</script>
+
+<p>题2=============================================================================================================================</p>
+<p>var v1 = 10;</p>
+<p>var v2 = 20;</p>
+<p>function test(){</p>
+<p>  console.log(v1);</p>
+<p>  if(true){</p>
+<p>    var v1 = 30;</p>
+<p>  }</p>
+<p>  function callback(){</p>
+<p>    return v1+""+v2;</p>
+<p>  };</p>
+<p>  console.log(v1);</p>
+<p>  v1 = 4;</p>
+<p>  return callback;</p>
+<p>}</p>
+<p>var result = test()();</p>
+<p>console.log(result);</p>
+
+<script type="text/javascript">
+var v1 = 10;
+var v2 = 20;
+function test(){
+  document.write("第一个v1:"+v1+"<br>");
+  if(true){
+    var v1 = 30;
+  }
+  function callback(){
+    return v1+""+v2;
+  };
+  document.write("第二个v1:"+v1+"<br>");
+  v1 = 4;
+  return callback;
+}
+var result = test()();
+document.write("<hr>");
+document.write("test:"+test+"<br>");
+document.write("<hr>");
+document.write("test():"+test()+"<br>");
+document.write("<hr>");
+document.write("最后的result即test()():"+result+"<br>");
+</script>
+
+<p>题3=============================================================================================================================</p>
+
+<p>var a = null;</p>
+<p>var b;</p>
+<script type="text/javascript">
+var a = null;
+var b;
+document.write("alert(a==b);//"+(a==b)+"<br>");
+document.write("alert(typeof a);//"+(typeof a)+"<br>");
+document.write("alert(typeof b);//"+(typeof b)+"<br>");
+document.write("alert(typeof a==typeof b);//"+(typeof a==typeof b)+"<br>");
+document.write("alert('123'==new Object('123'));//"+('123'==new Object('123'))+"<br>");
+document.write("alert(123===new Number(123));//"+(123===new Number(123))+"<br>");
+document.write("alert(new Number('123')==new Object('123'));//"+(new Number('123')==new Object('123'))+"<br>");
+</script>
+</p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+ <body>
+    <ul>
+		<li>Download <a href="ftp://10.1.83.81/software/node-v0.6.16.tar.gz">node-v0.6.16.tar.gz</a></li>
+<li>tar -xvf node-v0.6.16.tar.gz</li>
+<li>cd node-v0.6.16</li>
+<li>./configure && make && make install</li>
+<li>svn checkout svn://10.1.81.198/app/gobang</li>
+<li>cd gobang</li>
+<li>sed -i s/10.1.83.81/[your_server_ip]/g gobang/client.js</li>
+<li>node gobang/server.js</li>
+<li>node game_server/server.js</li>
+<li>visit http://your_server_ip:8001</li>
+</ul>
+ </body>
+</html>
+

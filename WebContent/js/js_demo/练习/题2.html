@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+<script type="text/javascript">
+function test01(){
+  var foo = 1;
+  function bar() {
+    foo = 10;
+    return;
+    function foo() {}//执行bar()时，最先初始化foo(),此时foo变成局部变量，再进行赋值运算将foo的值设置为10
+  }
+  bar();
+  alert(foo);//作用域是全局，查找的全局变量foo
+}
+
+
+function test02(){
+  function bar() {
+      return foo;
+      foo = 10;
+      function foo() {}
+      var foo = 11;
+  }
+  alert(typeof bar());
+}
+
+
+//------------------------------------------------
+function test03(){
+var x = 3;
+
+var foo = {
+    x: 2,
+    baz: {
+        x: 1,
+        bar: function() {
+            return this.x;
+        }
+    }
+}
+
+var go = foo.baz.bar;
+
+alert(go());//3
+alert(foo.baz.bar());//1
+}
+
+
+//------------------------------------------------
+function test04(){
+var x   = 4,
+    obj = {
+        x: 3,
+        bar: function() {
+            var x = 2;
+            setTimeout(function() {
+                var x = 1;
+                alert(this.x);
+            }, 1000);
+        }
+    };
+obj.bar();
+}
+
+
+
+
+function test05(){
+var a = 123;
+
+var a = function(){
+alert(a);
+return a;
+}
+
+a();
+}
+test05();
+
+
+
+
+
+</script>
+</body>
+</html>

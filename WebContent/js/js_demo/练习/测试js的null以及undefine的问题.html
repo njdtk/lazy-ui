@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<script type="text/javascript">
+function test(index){
+  document.write("index = "+index+ "</br>");
+  document.write("index===undefined  "+(index===undefined)+ "</br>");
+  document.write("typeof index==='undefined'  "+(typeof index==="undefined")+ "</br>");
+  document.write("index===null  "+(index===null)+ "</br>");
+  document.write("!index  "+(!index)+ "</br>");
+  document.write("-------------------------------------------------------------------</br>");
+}
+
+
+
+//测试null以及undefined的使用
+function testNull(){
+  document.write("【undefined==null】= "+(undefined==null)+ "<br>");
+  document.write("【undefined>=null】= "+(undefined>=null)+ "</br>");
+  document.write("【undefined>=null】= "+(undefined>=null)+ "</br>");
+  document.write("【undefined>=0】= "+(undefined>=0)+ "</br>");
+  document.write("【null>=0】= "+(null>=0)+ "</br>");
+  document.write("【null==NaN】= "+(null==NaN)+ "</br>");
+  return 4;
+}
+
+
+//执行
+//test();
+//test(null);
+//test("");
+var a= new testNull();
+document.write("</br>");
+document.write("【typeof test.prototype】= "+typeof test.prototype+ "</br>");
+document.write("</br>");
+document.write("【new testNull()】= "+a+ "</br>");
+document.write("</br>");
+document.write("【null==undefinded】= "+(null==undefined)+ "</br>");
+document.write("【NaN==NaN】= "+(NaN==NaN)+ "</br>");
+document.write("</br>");
+document.write("【Number(true)】= "+(Number(true))+ "</br>");
+document.write("【Number(null)】= "+(Number(null))+ "</br>");
+document.write("【Number(undefined)】= "+(Number(undefined))+ "</br>");
+document.write("【Number('')】= "+(Number(''))+ "</br>");
+document.write("【Number('ddd')】= "+(Number('ddd'))+ "</br>");
+document.write("</br>");
+document.write("【a.valueOf()】= "+a.valueOf()+ "</br>");
+</script>
+</body>
+</html>

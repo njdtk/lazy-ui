@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+p{color:blue;font:normal bold 19px;}
+</style>
+<body>
+<script type="text/javascript">
+var a = 1;
+function foo(){
+  if(a==1){
+    var b = 2;
+    if(b==2){
+      c = 3;
+    }
+  }
+}
+foo();
+alert(a);
+alert(c);
+
+var foo1 = new Function("", "alert('hi');");
+foo1();
+
+var a1;
+alert(a1);
+
+var arr = [1,'name',true,[-1,0,1]];
+arr[5] = function(){alert('element')};
+alert(arr.length);
+alert(arr);
+
+var myobj = {
+  name:"QQ",
+  getName:function(){
+    return this.name;
+  }
+};
+alert(myobj.getName());
+
+
+function foo2(){
+  var f = function(){
+    return "hello";
+  }
+  return f;
+}
+var nf = foo2;
+alert("nf:"+nf);
+alert("nf():"+nf());
+
+alert(typeof(function(){}));
+alert(typeof(undefined));
+alert(isNaN(true));
+
+function test1(){
+  var str = "";
+  var a;
+  if(a==undefined){
+    str+="1";
+  }else{
+    str+="2";
+  }
+  if(typeof(a)==undefined){
+    str+="3";
+  }else{
+    str+="4";
+  }
+  if(typeof(a)=="undefined"){
+    str+="5";
+  }else{
+    str+="6";
+  }
+  alert("test1_str:"+str);
+}
+
+
+function test2(){
+  var a = 1;
+  function foo(){
+    var a = 2;
+    var b = 3;
+    alert(b);
+    c = 4;
+  }
+  alert(a);
+  foo();
+  alert(c);
+}
+
+
+function test3(){
+var object ={a,b};
+//var object = {a = 1,b = 2};
+//var object = {a:1,b:2};
+//var object = {"a":1,"b":2};
+//var object = {'a':1,'b':2};
+//var object = {a,b};
+alert(object.toString())
+}
+
+test3();
+
+</script>
+
+</body>
+</html>
