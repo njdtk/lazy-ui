@@ -6,10 +6,28 @@
 		<script src="../lib/jquery.js"></script>
 		<script src="../lib/underscore.js"></script>
 		<script src="../lib/backbone.js"></script>
-		<script src="Lazy_ValidateBox.js"></script>
+		<script src="../lib/lazy_lib.js"></script>
+		<script src="lazy_validatebox.js"></script>
+		<style type="text/css">
+			li{
+				margin-bottom: 15px;
+			}
+		</style>
 	</head>
 	<body>
 		<script type="text/javascript">
+			//验证规则扩充
+			$.extend(Lazy_validateRule,{
+				"test":{
+					validateReg:function(value,param){
+						return true;
+					},//接收直接定义正则表达式
+					validateMsg:function(value,param){
+						return "massage";
+					}//接收直接定义字符串语句
+				}
+				
+			});
 			window.onload = function() {
 				var testdemo = new Lazy_ValidateBox({
 					baseEl:'#validatebox1',
@@ -18,25 +36,31 @@
 					reg_exp:/^[1-9][0-9]*$/
 					});
 				
-				$('button').click(function() {
+				$("#button1").click(function() {
 					testdemo.inputValidate();
 				});
 				
-				$('#validatebox2').Lazy_ValidateBox('请输入正整数',/^[1-9][0-9]*$/,true);
+				var validateObj = Lazy_CreateValidates("#validateBlock");
+				
+				$("#button2").click(function() {
+					Lazy_BlockValidate(validateObj);
+				});
 			};
 		</script>
 	<div>
 		<ul>
 			<li>
-				请输入正整数
+				<span>单个生成：</span><input id="validatebox1" required/>
+				<button id="button1">点击</button>
 			</li>
 			<li>
-				<span>测试1：</span><input id="validatebox1" required/>
+				<span>整块生成：</span>
+				<div id="validateBlock" style="margin-top:5px">
+					<span>原数据：</span><input id="oldPwd" class="cs2c_validatebox" validatetype="passWord" required/>
+					<span>确认数据：</span><input class="cs2c_validatebox" validatetype="equalTo[#oldPwd]" required/>
+					<button id="button2">点击</button>
+				</div>
 			</li>
-			<li>
-				<span>测试2：</span><input id="validatebox2" required/>
-			</li>	
-			<li><button>点击</button></li>	
 		</ul>
 	</div>
 	</body>
